@@ -175,22 +175,71 @@ nav{background:var(--secondary);}
 .cd-sep{color:#fff;font-weight:700;}
 
 /* ===== PRODUCT GRID ===== */
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
-.product-card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--card-shadow);transition:transform .2s,box-shadow .2s;position:relative;cursor:pointer;}
-.product-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(30,40,80,0.14);}
-.product-img{width:100%;height:170px;background:#f0f4ff;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;overflow:hidden;}.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}.product-card:hover .product-img img{transform:scale(1.05);}
-.discount-badge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px;}
-.wishlist-btn{position:absolute;top:8px;right:8px;background:#fff;border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,0.1);opacity:0;transition:opacity .2s;}
-.product-card:hover .wishlist-btn{opacity:1;}
-.product-info{padding:12px;}
-.product-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.product-seller{font-size:11px;color:var(--muted);margin-bottom:6px;}
-.product-price{font-size:16px;font-weight:700;color:var(--primary);}
-.product-old-price{font-size:12px;color:var(--muted);text-decoration:line-through;margin-left:4px;}
-.product-stock{font-size:11px;color:var(--green);margin-top:3px;}
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+@media(min-width:600px){.products-grid{grid-template-columns:repeat(3,1fr);gap:14px;}}
+@media(min-width:1000px){.products-grid{grid-template-columns:repeat(4,1fr);gap:16px;}}
+
+/* Card */
+.product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 14px rgba(10,42,110,0.08);border:1.5px solid #eef1f8;transition:transform .2s,box-shadow .2s;position:relative;cursor:default;display:flex;flex-direction:column;}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(21,101,192,0.13);border-color:#c5d3f0;}
+
+/* Image */
+.product-img{width:100%;aspect-ratio:1/1;background:#f0f4ff;display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;overflow:hidden;flex-shrink:0;}
+.product-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s;}
+.product-card:hover .product-img img{transform:scale(1.04);}
+
+/* Label badge top-left (Premium/Hot/New etc) */
+.product-label{position:absolute;top:0;left:0;padding:5px 10px;font-size:10px;font-weight:800;color:#fff;border-radius:0 0 10px 0;z-index:2;text-transform:uppercase;letter-spacing:.3px;}
+.label-hot{background:#e74c3c;}
+.label-new{background:#27ae60;}
+.label-trending{background:#8e44ad;}
+.label-luxury{background:#c0a000;}
+.label-premium{background:var(--secondary);}
+.label-default{background:var(--secondary);}
+
+/* Bonus badge top-right */
+.product-bonus{position:absolute;top:0;right:0;background:#27ae60;color:#fff;font-size:10px;font-weight:800;padding:5px 9px;border-radius:0 0 0 10px;z-index:2;}
+
+/* Discount badge (when no label) */
+.discount-badge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;z-index:2;}
+
+/* Wishlist */
+.wishlist-btn{position:absolute;bottom:8px;right:8px;background:#fff;border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:15px;box-shadow:0 2px 8px rgba(0,0,0,0.15);cursor:pointer;z-index:2;transition:transform .15s;opacity:1;}
+.wishlist-btn:hover{transform:scale(1.18);}
+.wishlist-btn.wishlisted{color:var(--red);}
+
+/* Info */
+.product-info{padding:12px 12px 13px;display:flex;flex-direction:column;flex:1;}
+.product-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer;}
+.product-name:hover{color:var(--primary);}
+
+/* Price row */
+.product-price{font-size:20px;font-weight:900;color:#e74c3c;font-family:'Nunito',sans-serif;}
+.product-price-row{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:2px 0 5px;}
+.product-old-price{font-size:12px;color:var(--muted);text-decoration:line-through;}
+.product-disc-tag{background:#fff0f0;color:#e74c3c;font-size:11px;font-weight:700;padding:2px 7px;border-radius:5px;}
+
+/* Stars */
+.stars-display{color:#f5a623;font-size:13px;letter-spacing:1px;}
+.rating-count{font-size:11px;color:var(--muted);}
+
+/* Stock */
+.product-stock{font-size:11px;color:var(--green);margin-bottom:7px;}
 .product-stock.low{color:var(--red);}
-.add-cart-btn{width:100%;margin-top:10px;background:var(--primary);color:#fff;border:none;padding:8px;border-radius:6px;font-size:12px;font-weight:600;transition:background .2s;}
-.add-cart-btn:hover{background:var(--primary-dark);}
+
+/* Buttons — always visible */
+.card-action-btns{margin-top:auto;display:flex;flex-direction:column;gap:7px;}
+.card-top-btns{display:flex;gap:7px;}
+.card-add-btn{flex:1;padding:13px 4px;background:var(--primary);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:transform .12s,background .15s;box-shadow:0 3px 12px rgba(21,101,192,0.3);}
+.card-add-btn:hover{background:#0d47a1;}
+.card-add-btn:active{transform:scale(0.92);}
+.card-buy-btn{flex:1;padding:13px 4px;background:#e74c3c;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;transition:transform .12s,background .15s;box-shadow:0 3px 12px rgba(231,76,60,0.3);}
+.card-buy-btn:hover{background:#c0392b;}
+.card-buy-btn:active{transform:scale(0.92);}
+.card-view-btn{width:100%;padding:10px;background:#fff;color:var(--primary);border:2px solid #dde5f5;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;transition:all .15s;}
+.card-view-btn:hover{border-color:var(--primary);background:#f0f4ff;}
+.card-view-btn:active{transform:scale(0.97);}
+.add-cart-btn{display:none;}
 
 /* ===== CATEGORIES ===== */
 .categories-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:14px;}
@@ -419,7 +468,6 @@ footer{background:var(--secondary);color:#cdd3e0;padding:48px 16px 0;}
   .pd-gallery{width:100%;}
 }
 @media(max-width:480px){
-  .products-grid{grid-template-columns:repeat(2,1fr);}
   .categories-grid{grid-template-columns:repeat(3,1fr);}
 }
 /* ===== ADMIN PANEL ===== */
@@ -568,8 +616,7 @@ textarea.adm-form-input{resize:vertical;min-height:70px;}
 .cat-chip { display:flex; align-items:center; gap:8px; background:#fff; border-radius:25px; padding:8px 18px; white-space:nowrap; border:1.5px solid var(--border); font-size:13px; font-weight:600; color:var(--text); cursor:pointer; transition:all .2s; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
 .cat-chip:hover,.cat-chip.active { background:var(--primary); color:#fff; border-color:var(--primary); box-shadow:0 4px 14px rgba(21,101,192,.25); }
 .cat-chip .ci { font-size:18px; }
-.product-card { border:1px solid var(--border); transition: all .25s !important; }
-.product-card:hover { transform:translateY(-6px) !important; border-color:var(--primary); box-shadow:0 12px 32px rgba(21,101,192,0.15) !important; }
+/* card hover handled above */
 .new-badge { position:absolute; top:8px; left:8px; background:#27ae60; color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px; }
 .flash-badge { position:absolute; top:8px; left:8px; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:5px; animation:flash-pulse 1.5s ease infinite; }
 @keyframes flash-pulse { 0%,100%{opacity:1} 50%{opacity:.75} }
@@ -635,59 +682,25 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
 .drawer-remove:hover{color:var(--red);}
 .drawer-item-total{flex-shrink:0;font-weight:800;color:var(--secondary);font-size:14px;min-width:72px;text-align:right;}
 
-/* ===== JUMIA-STYLE HOVER ACTION BUTTONS ON CARDS ===== */
-.product-img{overflow:hidden;position:relative;}
-.card-hover-actions{
-  position:absolute;bottom:0;left:0;right:0;
-  display:flex;flex-direction:column;gap:0;
-  transform:translateY(100%);
-  transition:transform .22s cubic-bezier(.4,0,.2,1);
-  z-index:3;
-}
-.product-card:hover .card-hover-actions{transform:translateY(0);}
-.card-add-btn{
-  width:100%;padding:9px 0;background:var(--primary);color:#fff;
-  border:none;font-size:13px;font-weight:700;cursor:pointer;
-  transition:background .15s;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-}
-.card-add-btn:hover{background:var(--primary-dark);}
-.card-buy-btn{
-  width:100%;padding:9px 0;background:var(--accent);color:var(--secondary);
-  border:none;font-size:13px;font-weight:800;cursor:pointer;
-  transition:background .15s;
-  display:flex;align-items:center;justify-content:center;gap:6px;
-}
-.card-buy-btn:hover{background:#f9cf00;}
-
 /* ===== BADGE POP ANIMATION ===== */
-@keyframes badgePop{0%{transform:scale(1)}30%{transform:scale(1.5)}60%{transform:scale(.9)}100%{transform:scale(1)}}
+@keyframes badgePop{0%{transform:scale(1)}30%{transform:scale(1.5)}60%{transform:scale(0.9)}100%{transform:scale(1)}}
 .badge-pop{animation:badgePop .35s ease both;}
 
-/* ===== MOBILE IMPROVEMENTS ===== */
+/* ===== MOBILE FIXES ===== */
 @media(max-width:600px){
   .header-main{gap:8px;padding:8px 10px;}
-  .header-actions .hbtn span.badge,
-  .header-actions .hbtn .wishlist-count{font-size:10px;width:16px;height:16px;}
+  .header-actions .hbtn span.badge,.header-actions .hbtn .wishlist-count{font-size:10px;width:16px;height:16px;}
   .header-actions .hbtn{padding:7px 10px;font-size:12px;gap:4px;}
   .search-bar input{font-size:13px;padding:9px 10px;}
   .search-bar select{padding:0 6px;font-size:11px;max-width:80px;}
   .pd-action-row{flex-direction:column;gap:8px;}
-  .pd-action-row .btn-add-cart-lg,.pd-action-row .btn-buy-now{width:100%;}
-  .pd-action-row .btn-wishlist-lg{width:100%;}
+  .pd-action-row .btn-add-cart-lg,.pd-action-row .btn-buy-now,.pd-action-row .btn-wishlist-lg{width:100%;}
   #cart-drawer{width:100vw;}
   .drawer-item-total{min-width:55px;font-size:13px;}
-  .product-card:hover .card-hover-actions,.product-card:focus-within .card-hover-actions{transform:translateY(0);}
-  /* Always show action buttons on mobile (no hover) */
-  .card-hover-actions{transform:translateY(0)!important;}
-  .product-img{height:auto;}
-  .card-add-btn,.card-buy-btn{padding:8px 0;font-size:12px;}
-}
-
-/* Cart button pulse on desktop */
-@media(hover:hover){
-  .card-hover-actions{transform:translateY(100%);}
-  .product-card:hover .card-hover-actions{transform:translateY(0);}
+  .product-name{font-size:13px;}
+  .product-price{font-size:17px;}
+  .card-add-btn,.card-buy-btn{font-size:11px;padding:11px 3px;}
+  .card-view-btn{font-size:11px;padding:9px;}
 }
 
 </style>
@@ -2465,38 +2478,88 @@ function switchPdTab(tab,btn){
   document.getElementById('pd-tab-'+tab).classList.add('active');
 }
 
-// ===== PRODUCT CARDS (Jumia-style) =====
+// ===== PRODUCT CARDS (Jumia/Screenshot-style) =====
 function createProductCard(p){
   const low = p.stock.includes('Low')||p.stock.includes('Last');
   const imgUrl = getProductImage(p);
   const liked = wishlist.includes(p.id);
   const {avg, count} = getProductRating(p.id);
   const disc = Math.round((1 - p.price/p.originalPrice)*100);
-  return`<div class="product-card" onclick="openProduct(${p.id})">
-    <div class="product-img" style="position:relative;">
-      <div class="discount-badge">-${disc}%</div>
-      <button class="wishlist-btn ${liked?'wishlisted':''}" onclick="event.stopPropagation();toggleWishlist(${p.id})" title="${liked?'Remove from wishlist':'Add to wishlist'}">${liked?'❤️':'♡'}</button>
+  const fullStars = Math.round(avg);
+  const starsHtml = '★'.repeat(fullStars)+'☆'.repeat(5-fullStars);
+  // Assign label based on product characteristics
+  const labels = ['Premium','Hot','New','Trending','Luxury'];
+  const labelClasses = {'Premium':'label-premium','Hot':'label-hot','New':'label-new','Trending':'label-trending','Luxury':'label-luxury'};
+  const label = labels[p.id % labels.length];
+  const labelClass = labelClasses[label];
+
+  return`<div class="product-card">
+    <div class="product-img" onclick="openProduct(${p.id})" style="cursor:pointer;">
+      <div class="product-label ${labelClass}">${label}</div>
+      <div class="product-bonus">+${disc}% OFF</div>
+      <button class="wishlist-btn ${liked?'wishlisted':''}" onclick="event.stopPropagation();toggleWishlist(${p.id})">${liked?'❤️':'♡'}</button>
       <img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80'">
-      <!-- Jumia-style hover action overlay -->
-      <div class="card-hover-actions" onclick="event.stopPropagation()">
-        <button class="card-add-btn" onclick="addToCart(${p.id},1,true)">🛒 Add to Cart</button>
-        <button class="card-buy-btn" onclick="buyNow(${p.id},1)">⚡ Buy Now</button>
-      </div>
     </div>
     <div class="product-info">
-      <div class="product-name">${p.name}</div>
-      <div class="product-seller">by ${p.seller}</div>
-      <div class="rating-row">
-        <span class="stars-display">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</span>
-        <span class="rating-count">(${count})</span>
-      </div>
-      <div>
+      <div class="product-name" onclick="openProduct(${p.id})">${p.name}</div>
+      <div class="product-price-row">
         <span class="product-price">₦${p.price.toLocaleString()}</span>
         <span class="product-old-price">₦${p.originalPrice.toLocaleString()}</span>
+        <span class="product-disc-tag">-${disc}%</span>
+      </div>
+      <div class="rating-row">
+        <span class="stars-display">${starsHtml}</span>
+        <span class="rating-count">(${count})</span>
       </div>
       <div class="product-stock ${low?'low':''}">${low?'⚠️':'✅'} ${p.stock}</div>
+      <div class="card-action-btns" onclick="event.stopPropagation()">
+        <div class="card-top-btns">
+          <button class="card-add-btn" onclick="cardAddToCart(this,${p.id})">🛒 Add to Cart</button>
+          <button class="card-buy-btn" onclick="cardBuyNow(this,${p.id})">⚡ Buy Now</button>
+        </div>
+        <button class="card-view-btn" onclick="openProduct(${p.id})">👁 View Description</button>
+      </div>
     </div>
   </div>`;
+}
+
+// Add to cart with burst animation
+function cardAddToCart(btn, id){
+  addToCart(id, 1, true);
+  showBurst(btn, '#1565c0');
+}
+
+// Buy Now with burst animation
+function cardBuyNow(btn, id){
+  showBurst(btn, '#e74c3c');
+  setTimeout(()=>buyNow(id, 1), 350);
+}
+
+// Star burst / ripple animation on button click
+function showBurst(btn, color){
+  btn.style.transform = 'scale(0.93)';
+  btn.style.transition = 'transform 0.1s';
+  // Create burst stars
+  const rect = btn.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+  for(let i=0;i<8;i++){
+    const star = document.createElement('div');
+    star.textContent = '★';
+    star.style.cssText = `position:fixed;left:${cx}px;top:${cy}px;font-size:18px;color:${color};pointer-events:none;z-index:9999;transform:translate(-50%,-50%);animation:starBurst${i} 0.55s ease forwards;`;
+    document.body.appendChild(star);
+    const angle = (i/8)*360;
+    const rad = angle * Math.PI/180;
+    const dist = 45 + Math.random()*20;
+    const tx = Math.cos(rad)*dist;
+    const ty = Math.sin(rad)*dist;
+    // inject keyframe dynamically
+    const style = document.createElement('style');
+    style.textContent = `@keyframes starBurst${i}{0%{opacity:1;transform:translate(-50%,-50%) scale(1);}100%{opacity:0;transform:translate(calc(-50% + ${tx}px),calc(-50% + ${ty}px)) scale(0.3) rotate(${angle}deg);}}`;
+    document.head.appendChild(style);
+    setTimeout(()=>{star.remove();style.remove();}, 600);
+  }
+  setTimeout(()=>{ btn.style.transform='scale(1)'; }, 150);
 }
 
 function renderHomeGrids(){
