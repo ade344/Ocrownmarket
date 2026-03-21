@@ -606,7 +606,89 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
 .products-toolbar { position:sticky; top:72px; z-index:100; }
 @media(max-width:640px){ .trust-divider{display:none;} .trust-item{font-size:11px;padding:4px 8px;} .hero-promo-card{display:none;} }
 
+/* ===== CART DRAWER (Jumia-style) ===== */
+#cart-drawer-overlay{display:none;}
+#cart-drawer-overlay.open{display:block;}
+#cart-drawer.open{transform:translateX(0)!important;}
+
+.drawer-item{display:flex;gap:12px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);}
+.drawer-item:last-child{border-bottom:none;}
+.drawer-item-img{width:72px;height:72px;flex-shrink:0;border-radius:8px;overflow:hidden;border:1px solid var(--border);cursor:pointer;background:var(--light);}
+.drawer-item-img img{width:100%;height:100%;object-fit:cover;}
+.drawer-item-info{flex:1;min-width:0;}
+.drawer-item-name{font-size:13px;font-weight:600;color:var(--text);cursor:pointer;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:3px;}
+.drawer-item-name:hover{color:var(--primary);}
+.drawer-item-seller{font-size:11px;color:var(--muted);margin-bottom:5px;}
+.drawer-item-prices{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.drawer-price{font-size:15px;font-weight:800;color:var(--primary);}
+.drawer-old-price{font-size:12px;color:var(--muted);text-decoration:line-through;}
+.drawer-qty-row{display:flex;align-items:center;gap:6px;}
+.dqbtn{width:28px;height:28px;border:1.5px solid var(--border);border-radius:5px;background:#fff;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;color:var(--primary);}
+.dqbtn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+.dqval{font-weight:700;font-size:15px;min-width:26px;text-align:center;}
+.drawer-remove{background:none;border:none;color:var(--muted);font-size:12px;cursor:pointer;margin-left:4px;transition:color .15s;padding:2px 4px;}
+.drawer-remove:hover{color:var(--red);}
+.drawer-item-total{flex-shrink:0;font-weight:800;color:var(--secondary);font-size:14px;min-width:72px;text-align:right;}
+
+/* ===== JUMIA-STYLE HOVER ACTION BUTTONS ON CARDS ===== */
+.product-img{overflow:hidden;position:relative;}
+.card-hover-actions{
+  position:absolute;bottom:0;left:0;right:0;
+  display:flex;flex-direction:column;gap:0;
+  transform:translateY(100%);
+  transition:transform .22s cubic-bezier(.4,0,.2,1);
+  z-index:3;
+}
+.product-card:hover .card-hover-actions{transform:translateY(0);}
+.card-add-btn{
+  width:100%;padding:9px 0;background:var(--primary);color:#fff;
+  border:none;font-size:13px;font-weight:700;cursor:pointer;
+  transition:background .15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.card-add-btn:hover{background:var(--primary-dark);}
+.card-buy-btn{
+  width:100%;padding:9px 0;background:var(--accent);color:var(--secondary);
+  border:none;font-size:13px;font-weight:800;cursor:pointer;
+  transition:background .15s;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.card-buy-btn:hover{background:#f9cf00;}
+
+/* ===== BADGE POP ANIMATION ===== */
+@keyframes badgePop{0%{transform:scale(1)}30%{transform:scale(1.5)}60%{transform:scale(.9)}100%{transform:scale(1)}}
+.badge-pop{animation:badgePop .35s ease both;}
+
+/* ===== MOBILE IMPROVEMENTS ===== */
+@media(max-width:600px){
+  .header-main{gap:8px;padding:8px 10px;}
+  .header-actions .hbtn span.badge,
+  .header-actions .hbtn .wishlist-count{font-size:10px;width:16px;height:16px;}
+  .header-actions .hbtn{padding:7px 10px;font-size:12px;gap:4px;}
+  .search-bar input{font-size:13px;padding:9px 10px;}
+  .search-bar select{padding:0 6px;font-size:11px;max-width:80px;}
+  .pd-action-row{flex-direction:column;gap:8px;}
+  .pd-action-row .btn-add-cart-lg,.pd-action-row .btn-buy-now{width:100%;}
+  .pd-action-row .btn-wishlist-lg{width:100%;}
+  #cart-drawer{width:100vw;}
+  .drawer-item-total{min-width:55px;font-size:13px;}
+  .product-card:hover .card-hover-actions,.product-card:focus-within .card-hover-actions{transform:translateY(0);}
+  /* Always show action buttons on mobile (no hover) */
+  .card-hover-actions{transform:translateY(0)!important;}
+  .product-img{height:auto;}
+  .card-add-btn,.card-buy-btn{padding:8px 0;font-size:12px;}
+}
+
+/* Cart button pulse on desktop */
+@media(hover:hover){
+  .card-hover-actions{transform:translateY(100%);}
+  .product-card:hover .card-hover-actions{transform:translateY(0);}
+}
+
 </style>
+<!-- Paystack -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
 <!-- Firebase SDK -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -639,7 +721,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       window._pendingCheckout = false;
       // Admin check on pending checkout
       if(user.email && user.email.toLowerCase()==='ocrownmarket@gmail.com'){
-        sessionStorage.setItem('benim_admin_auth','1');
+        sessionStorage.setItem('ocrown_admin_auth','1');
         document.getElementById('admin-overlay').classList.add('open');
         document.getElementById('admin-login-screen').style.display='none';
         document.getElementById('admin-app').classList.add('open');
@@ -649,7 +731,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       }
     }
     // If admin is already logged in via session, add admin button to header
-    if(sessionStorage.getItem('benim_admin_auth')){
+    if(sessionStorage.getItem('ocrown_admin_auth')){
       addAdminHeaderBtn();
     }
   });
@@ -686,7 +768,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       if(emailInput && user.email) emailInput.value = user.email;
       // Show admin button if admin email
       if(user.email && user.email.toLowerCase()==='ocrownmarket@gmail.com'){
-        sessionStorage.setItem('benim_admin_auth','1');
+        sessionStorage.setItem('ocrown_admin_auth','1');
         setTimeout(addAdminHeaderBtn, 100);
       }
     } else {
@@ -696,7 +778,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       // Remove admin button on logout
       const adminBtn = document.getElementById('admin-header-btn');
       if(adminBtn) adminBtn.remove();
-      sessionStorage.removeItem('benim_admin_auth');
+      sessionStorage.removeItem('ocrown_admin_auth');
     }
   }
 
@@ -712,9 +794,9 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
     try{
       await signInWithEmailAndPassword(auth, email, password);
       // ===== ADMIN CHECK =====
-      if(email.toLowerCase()==='ocrownmarket@gmail.com'){
+      if(email.toLowerCase()===ADMIN_EMAIL.toLowerCase() && password===ADMIN_PASSWORD){
         showToast('👑 Welcome back, Admin!');
-        sessionStorage.setItem('benim_admin_auth','1');
+        sessionStorage.setItem('ocrown_admin_auth','1');
         showPage('home'); // stay on marketplace
         setTimeout(()=>{
           document.getElementById('admin-overlay').classList.add('open');
@@ -893,7 +975,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
         <span class="notif-dot"></span>
       </button>
       <button class="hbtn" onclick="showPage('wishlist')">❤️ Wishlist <span class="wishlist-count" id="wishlistBadge">0</span></button>
-      <button class="hbtn" onclick="showPage('cart')">🛒 Cart <span class="badge" id="cartBadge">0</span></button>
+      <button class="hbtn" onclick="openCartDrawer()">🛒 Cart <span class="badge" id="cartBadge">0</span></button>
       <button class="hbtn" onclick="showPage('customer-dashboard')">👤 Account</button>
     </div>
   </div>
@@ -1114,7 +1196,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
         <p>📍 Ibadan, Oyo State, Nigeria</p>
         <p style="margin-top:6px;">📞 <a href="tel:07080951392" style="color:#a8bcd8;">07080951392</a></p>
         <p style="margin-top:4px;">💬 <a href="https://wa.me/2347080951392" target="_blank" style="color:#25d366;font-weight:600;">WhatsApp Support</a></p>
-        <p style="margin-top:4px;">📧 <a href="mailto:ocrownmarket@gmail.com" style="color:#a8bcd8;">ocrownmarket@gmail.com</a></p>
+        <p style="margin-top:4px;">📧 <a href="/cdn-cgi/l/email-protection#533c30213c243d3e322138362713343e323a3f7d303c3e" style="color:#a8bcd8;"><span class="__cf_email__" data-cfemail="4f202c3d203821222e3d242a3b0f28222e2623612c2022">[email&#160;protected]</span></a></p>
         <p style="margin-top:8px;background:rgba(255,255,255,.06);border-radius:6px;padding:6px 10px;font-size:12px;">🕐 Mon–Sat: 8am – 8pm</p>
       </div>
     </div>
@@ -1238,7 +1320,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       <!-- ACTIONS -->
       <div class="pd-action-row">
         <button class="btn-add-cart-lg" id="pd-add-cart">🛒 Add to Cart</button>
-        <button class="btn-buy-now" onclick="requireAuthThenCheckout()">⚡ Buy Now</button>
+        <button class="btn-buy-now" id="pd-buy-now">⚡ Buy Now</button>
         <button class="btn-wishlist-lg" id="pd-wishlist-btn" onclick="toggleWishlistFromDetail()">♡</button>
       </div>
       <button class="wa-product-btn" id="pd-whatsapp-btn" onclick="contactSellerWhatsApp()">
@@ -1354,6 +1436,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       <h3>📦 Delivery Information</h3>
       <div class="form-group"><label>Full Name</label><input type="text" placeholder="Enter your full name"></div>
       <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="e.g. 07080951392"></div>
+      <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com" id="co-email"></div>
       <div class="form-group"><label>Delivery Address</label><input type="text" placeholder="Enter your full address"></div>
       <div class="form-group"><label>City / LGA</label>
         <select><option>Ibadan North</option><option>Ibadan South</option><option>Ibadan North-East</option><option>Ibadan South-West</option><option>Other (Delivery fee may apply)</option></select>
@@ -1361,15 +1444,69 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       <div class="form-group"><label>Additional Notes</label><textarea rows="3" placeholder="Any delivery instructions?"></textarea></div>
       <h3 style="margin-top:24px;margin-bottom:16px;">💳 Payment Method</h3>
       <div class="payment-options">
-        <div class="pay-option selected" id="pay-bank" onclick="selectPay('bank')">🏦<br>Bank Transfer</div>
-        <div class="pay-option" id="pay-cod" onclick="selectPay('cod')">💵<br>Cash on Delivery</div>
+        <div class="pay-option selected" id="pay-paystack" onclick="selectPay('paystack')">
+          <div style="font-size:22px;margin-bottom:4px;">💳</div>
+          <div style="font-weight:700;font-size:13px;">Pay Online</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Card · Bank · USSD</div>
+        </div>
+        <div class="pay-option" id="pay-bank" onclick="selectPay('bank')">
+          <div style="font-size:22px;margin-bottom:4px;">🏦</div>
+          <div style="font-weight:700;font-size:13px;">Bank Transfer</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Opay transfer</div>
+        </div>
+        <div class="pay-option" id="pay-cod" onclick="selectPay('cod')">
+          <div style="font-size:22px;margin-bottom:4px;">💵</div>
+          <div style="font-weight:700;font-size:13px;">Pay on Delivery</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:2px;">Cash at door</div>
+        </div>
       </div>
-      <div id="bank-details" style="background:#f0f7ff;border-radius:8px;padding:14px;margin-top:14px;font-size:13px;line-height:1.8;">
-        <strong>Bank Transfer Details:</strong><br>Bank: First Bank Nigeria<br>Account Name: OCROWN Market Place Nigeria<br>Account Number: 0123456789<br>
-        <em style="color:var(--muted);">Send payment proof via WhatsApp after transfer.</em>
+
+      <!-- Paystack section -->
+      <div id="paystack-info" style="background:linear-gradient(135deg,#e8f5e9,#f0f7ff);border:1.5px solid #b2dfdb;border-radius:10px;padding:16px;margin-top:14px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+          <div style="background:#00c3f7;border-radius:6px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💳</div>
+          <div>
+            <div style="font-weight:700;font-size:14px;color:#1a7a40;">Pay Securely with Paystack</div>
+            <div style="font-size:11px;color:var(--muted);">Cards · Bank Transfer · USSD · Opay · Mobile Money</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;font-weight:600;">💳 Visa</span>
+          <span style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;font-weight:600;">💳 Mastercard</span>
+          <span style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;font-weight:600;">🏦 Bank</span>
+          <span style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;font-weight:600;">📱 USSD</span>
+          <span style="background:#fff;border:1px solid var(--border);border-radius:4px;padding:3px 10px;font-size:11px;font-weight:600;">💚 Opay</span>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:#1a7a40;display:flex;align-items:center;gap:6px;">🔒 256-bit SSL encrypted. Your payment is 100% secure.</div>
       </div>
+
+      <!-- Bank Transfer details -->
+      <div id="bank-details" style="display:none;background:#f0f7ff;border:1.5px solid #b3d1f7;border-radius:10px;padding:16px;margin-top:14px;font-size:13px;line-height:2;">
+        <div style="font-weight:800;font-size:14px;color:var(--secondary);margin-bottom:8px;">🏦 Transfer to this account:</div>
+        <div style="background:#fff;border-radius:8px;padding:12px 16px;border:1px solid var(--border);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--muted);">Bank</span><strong>Opay</strong></div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="color:var(--muted);">Account Name</span><strong>Oladeji Opeyemi</strong></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="color:var(--muted);">Account Number</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <strong style="font-size:17px;letter-spacing:1px;color:var(--primary);">8150898386</strong>
+              <button onclick="copyAcctNum()" style="background:var(--light);border:1px solid var(--border);border-radius:5px;padding:3px 10px;font-size:11px;font-weight:700;cursor:pointer;color:var(--primary);">Copy</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:10px;background:#fff8e1;border-radius:7px;padding:10px 14px;font-size:12px;color:#7a5800;">
+          📸 After transfer, send your payment proof to us on <a href="https://wa.me/2347080951392" target="_blank" style="color:var(--primary);font-weight:700;">WhatsApp</a> to confirm your order.
+        </div>
+      </div>
+
+      <!-- Cash on Delivery -->
+      <div id="cod-details" style="display:none;background:#f0fff4;border:1.5px solid #a8e6bf;border-radius:10px;padding:16px;margin-top:14px;font-size:13px;">
+        <div style="font-weight:700;font-size:14px;color:#1a7a40;margin-bottom:6px;">💵 Pay When Your Order Arrives</div>
+        <p style="color:#555;line-height:1.7;">Have your exact payment ready when our delivery agent arrives. Cash on Delivery is available <strong>within Ibadan only</strong>.</p>
+      </div>
+
       <div class="free-delivery-note" style="margin-top:14px;">🚚 Free delivery available within Ibadan!</div>
-      <button class="place-order-btn" onclick="placeOrder()">✅ Place Order</button>
+      <button class="place-order-btn" id="place-order-btn" onclick="handlePlaceOrder()">💳 Pay with Paystack</button>
     </div>
     <div style="width:100%;max-width:300px;">
       <div class="summary-card">
@@ -1466,9 +1603,9 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
           <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-val">4.8</div><div class="stat-label">Seller Rating</div></div>
         </div>
         <div class="data-table"><table><thead><tr><th>Order ID</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody>
-          <tr><td>#BNM001</td><td>iPhone 15 Pro</td><td>₦850,000</td><td><span class="status-badge delivered">Delivered</span></td><td>Mar 10, 2025</td></tr>
-          <tr><td>#BNM002</td><td>Nike Air Max</td><td>₦45,000</td><td><span class="status-badge pending">Pending</span></td><td>Mar 12, 2025</td></tr>
-          <tr><td>#BNM003</td><td>Samsung TV 55"</td><td>₦320,000</td><td><span class="status-badge processing">Processing</span></td><td>Mar 13, 2025</td></tr>
+          <tr><td>#OCR001</td><td>iPhone 15 Pro</td><td>₦850,000</td><td><span class="status-badge delivered">Delivered</span></td><td>Mar 10, 2025</td></tr>
+          <tr><td>#OCR002</td><td>Nike Air Max</td><td>₦45,000</td><td><span class="status-badge pending">Pending</span></td><td>Mar 12, 2025</td></tr>
+          <tr><td>#OCR003</td><td>Samsung TV 55"</td><td>₦320,000</td><td><span class="status-badge processing">Processing</span></td><td>Mar 13, 2025</td></tr>
         </tbody></table></div>
       </div>
       <div id="seller-tab-upload" style="display:none;">
@@ -1543,8 +1680,8 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       <div id="seller-tab-orders" style="display:none;">
         <div class="dash-header"><h2>My Orders</h2></div>
         <div class="data-table"><table><thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th></tr></thead><tbody>
-          <tr><td>#BNM001</td><td>Adaeze O.</td><td>iPhone 15 Pro</td><td>₦850,000</td><td><span class="status-badge delivered">Delivered</span></td></tr>
-          <tr><td>#BNM002</td><td>Babatunde F.</td><td>Nike Air Max</td><td>₦45,000</td><td><span class="status-badge pending">Pending</span></td></tr>
+          <tr><td>#OCR001</td><td>Adaeze O.</td><td>iPhone 15 Pro</td><td>₦850,000</td><td><span class="status-badge delivered">Delivered</span></td></tr>
+          <tr><td>#OCR002</td><td>Babatunde F.</td><td>Nike Air Max</td><td>₦45,000</td><td><span class="status-badge pending">Pending</span></td></tr>
         </tbody></table></div>
       </div>
       <div id="seller-tab-earnings" style="display:none;">
@@ -1584,15 +1721,15 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
           <div class="stat-card"><div class="stat-icon">⏳</div><div class="stat-val">2</div><div class="stat-label">Pending</div></div>
         </div>
         <div class="data-table"><table><thead><tr><th>Order ID</th><th>Product</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead><tbody>
-          <tr><td>#BNM010</td><td>Tecno Spark 20</td><td>₦85,000</td><td><span class="status-badge delivered">Delivered</span></td><td>Mar 10, 2025</td></tr>
-          <tr><td>#BNM011</td><td>Adidas Sneakers</td><td>₦35,000</td><td><span class="status-badge pending">Pending</span></td><td>Mar 14, 2025</td></tr>
+          <tr><td>#OCR010</td><td>Tecno Spark 20</td><td>₦85,000</td><td><span class="status-badge delivered">Delivered</span></td><td>Mar 10, 2025</td></tr>
+          <tr><td>#OCR011</td><td>Adidas Sneakers</td><td>₦35,000</td><td><span class="status-badge pending">Pending</span></td><td>Mar 14, 2025</td></tr>
         </tbody></table></div>
       </div>
       <div id="cust-tab-orders" style="display:none;">
         <div class="dash-header"><h2>My Orders</h2></div>
         <div class="data-table"><table><thead><tr><th>Order ID</th><th>Product</th><th>Qty</th><th>Amount</th><th>Status</th></tr></thead><tbody>
-          <tr><td>#BNM010</td><td>Tecno Spark 20</td><td>1</td><td>₦85,000</td><td><span class="status-badge delivered">Delivered</span></td></tr>
-          <tr><td>#BNM011</td><td>Adidas Sneakers</td><td>1</td><td>₦35,000</td><td><span class="status-badge pending">Pending</span></td></tr>
+          <tr><td>#OCR010</td><td>Tecno Spark 20</td><td>1</td><td>₦85,000</td><td><span class="status-badge delivered">Delivered</span></td></tr>
+          <tr><td>#OCR011</td><td>Adidas Sneakers</td><td>1</td><td>₦35,000</td><td><span class="status-badge pending">Pending</span></td></tr>
         </tbody></table></div>
       </div>
       <div id="cust-tab-saved" style="display:none;">
@@ -1602,7 +1739,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       <div id="cust-tab-track" style="display:none;">
         <div class="dash-header"><h2>Track Your Order</h2></div>
         <div style="background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--card-shadow);max-width:500px;">
-          <div class="form-group"><label>Enter Order ID</label><input type="text" placeholder="e.g. #BNM010" id="trackInput"></div>
+          <div class="form-group"><label>Enter Order ID</label><input type="text" placeholder="e.g. #OCR010" id="trackInput"></div>
           <button class="btn-primary" onclick="trackOrder()">Track Order</button>
           <div id="track-result" style="margin-top:16px;"></div>
         </div>
@@ -1649,7 +1786,7 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
       <h2>Get In Touch</h2>
       <div class="contact-info-item"><div class="ci-icon-box">📍</div><div class="ci-text"><strong>Address</strong><span>Nigeria</span></div></div>
       <div class="contact-info-item"><div class="ci-icon-box">📞</div><div class="ci-text"><strong>Phone / WhatsApp</strong><span><a href="tel:07080951392" style="color:var(--primary);">07080951392</a></span></div></div>
-      <div class="contact-info-item"><div class="ci-icon-box">✉️</div><div class="ci-text"><strong>Email</strong><span><a href="mailto:ocrownmarket@gmail.com" style="color:var(--primary);">ocrownmarket@gmail.com</a></span></div></div>
+      <div class="contact-info-item"><div class="ci-icon-box">✉️</div><div class="ci-text"><strong>Email</strong><span><a href="/cdn-cgi/l/email-protection#0a656978657d64676b78616f7e4a6d676b636624696567" style="color:var(--primary);"><span class="__cf_email__" data-cfemail="274844554850494a46554c425367404a464e4b0944484a">[email&#160;protected]</span></a></span></div></div>
       <div class="contact-info-item"><div class="ci-icon-box">💬</div><div class="ci-text"><strong>WhatsApp</strong><span><a href="https://wa.me/2347080951392" target="_blank" style="color:var(--primary);">07080951392</a></span></div></div>
       <div class="contact-info-item"><div class="ci-icon-box">🚚</div><div class="ci-text"><strong>Delivery</strong><span>Free delivery within Ibadan</span></div></div>
       <a href="https://wa.me/2347080951392" target="_blank" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;margin-top:8px;">💬 Chat on WhatsApp</a>
@@ -1681,9 +1818,40 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
   </div>
 </div>
 
+<!-- ========== JUMIA-STYLE CART DRAWER ========== -->
+<div id="cart-drawer-overlay" onclick="closeCartDrawer()" style="position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:3000;display:none;backdrop-filter:blur(2px);"></div>
+<div id="cart-drawer" style="position:fixed;top:0;right:0;height:100vh;width:420px;max-width:100vw;background:#fff;z-index:3001;display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(0,0,0,0.18);transform:translateX(110%);transition:transform .32s cubic-bezier(.4,0,.2,1);">
+  <!-- Drawer Header -->
+  <div style="background:var(--primary);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <span style="font-size:20px;">🛒</span>
+      <div>
+        <div style="font-weight:800;font-size:16px;font-family:'Nunito',sans-serif;">My Cart</div>
+        <div style="font-size:12px;opacity:.8;"><span id="drawer-count">0</span> item(s)</div>
+      </div>
+    </div>
+    <button onclick="closeCartDrawer()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:50%;width:36px;height:36px;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;">✕</button>
+  </div>
+  <!-- Drawer Body -->
+  <div id="cart-drawer-body" style="flex:1;overflow-y:auto;padding:14px 16px;"></div>
+  <!-- Drawer Footer -->
+  <div id="cart-drawer-footer" style="display:none;background:#fff;border-top:2px solid var(--border);padding:16px 20px;flex-shrink:0;">
+    <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:6px;" id="drawer-savings"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <span style="font-weight:700;font-size:15px;color:var(--secondary);">Total</span>
+      <span style="font-weight:900;font-size:20px;color:var(--primary);font-family:'Nunito',sans-serif;" id="drawer-total">₦0</span>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button onclick="closeCartDrawer();showPage('cart')" style="flex:1;background:var(--light);color:var(--primary);border:2px solid var(--primary);padding:12px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;">View Cart</button>
+      <button onclick="closeCartDrawer();requireAuthThenCheckout()" style="flex:2;background:var(--accent);color:var(--secondary);border:none;padding:12px;border-radius:8px;font-size:14px;font-weight:800;cursor:pointer;transition:all .2s;">⚡ Checkout Now</button>
+    </div>
+    <div style="text-align:center;margin-top:10px;font-size:11px;color:var(--muted);">🚚 Free delivery within Ibadan &nbsp;|&nbsp; 🔒 Secure checkout</div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ===== PRODUCT DATA =====
 const categories=['Phones & Tablets','Electronics','Fashion','Shoes','Bags','Beauty','Home Appliances','Gaming','Sports','Kids Items'];
 const catIcons={'Phones & Tablets':'📱','Electronics':'💻','Fashion':'👗','Shoes':'👟','Bags':'👜','Beauty':'💄','Home Appliances':'🏠','Gaming':'🎮','Sports':'⚽','Kids Items':'🧸'};
@@ -1908,24 +2076,164 @@ let cart=[];
 let pdQty=1;
 let currentProductId=null;
 
-function addToCart(id,qty=1){
-  const p=allProducts.find(x=>x.id===id);if(!p)return;
-  const e=cart.find(x=>x.id===id);
-  if(e)e.qty+=qty;else cart.push({...p,qty});
+/* ---- Jumia-style: Add to Cart with fly-animation + drawer open ---- */
+function addToCart(id, qty=1, openDrawer=true){
+  const p = allProducts.find(x=>x.id===id);
+  if(!p) return;
+  const e = cart.find(x=>x.id===id);
+  if(e) e.qty += qty; else cart.push({...p, qty});
   updateCartBadge();
-  showToast('✅ "'+p.name.substring(0,30)+'..." added to cart!');
+  saveCartToStorage();
+  if(openDrawer){
+    openCartDrawer();
+  } else {
+    showToast('✅ '+p.name.substring(0,28)+'… added to cart!');
+  }
 }
-function updateCartBadge(){document.getElementById('cartBadge').textContent=cart.reduce((s,i)=>s+i.qty,0);}
-function removeFromCart(id){cart=cart.filter(x=>x.id!==id);renderCart();updateCartBadge();}
-function changeQty(id,d){const i=cart.find(x=>x.id===id);if(i){i.qty=Math.max(1,i.qty+d);renderCart();}}
+
+/* ---- Buy Now: add to cart then go straight to checkout ---- */
+function buyNow(id, qty=1){
+  const p = allProducts.find(x=>x.id===id);
+  if(!p) return;
+  // Replace cart with just this item (Jumia behaviour)
+  cart = [{...p, qty}];
+  updateCartBadge();
+  saveCartToStorage();
+  requireAuthThenCheckout();
+}
+
+function saveCartToStorage(){
+  try{ localStorage.setItem('ocrown_cart', JSON.stringify(cart)); } catch(e){}
+}
+
+function updateCartBadge(){
+  const total = cart.reduce((s,i)=>s+i.qty, 0);
+  document.getElementById('cartBadge').textContent = total;
+  // pulse animation
+  const badge = document.getElementById('cartBadge');
+  badge.classList.remove('badge-pop');
+  void badge.offsetWidth;
+  badge.classList.add('badge-pop');
+}
+
+function removeFromCart(id){
+  cart = cart.filter(x=>x.id!==id);
+  renderCart();
+  renderCartDrawer();
+  updateCartBadge();
+  saveCartToStorage();
+}
+
+function changeQty(id, d){
+  const i = cart.find(x=>x.id===id);
+  if(i){
+    i.qty = Math.max(1, i.qty+d);
+    renderCart();
+    renderCartDrawer();
+    updateCartBadge();
+    saveCartToStorage();
+  }
+}
+
+/* ---- Cart Drawer (Jumia slide-in) ---- */
+function openCartDrawer(){
+  renderCartDrawer();
+  document.getElementById('cart-drawer').classList.add('open');
+  document.getElementById('cart-drawer-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCartDrawer(){
+  document.getElementById('cart-drawer').classList.remove('open');
+  document.getElementById('cart-drawer-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function renderCartDrawer(){
+  const drawer = document.getElementById('cart-drawer-body');
+  const footer = document.getElementById('cart-drawer-footer');
+  if(!cart.length){
+    drawer.innerHTML=`<div style="text-align:center;padding:60px 20px;">
+      <div style="font-size:60px;margin-bottom:14px;">🛒</div>
+      <div style="font-weight:700;font-size:16px;color:var(--secondary);margin-bottom:6px;">Your cart is empty</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:18px;">Add items to start shopping</div>
+      <button onclick="closeCartDrawer();showPage('products')" style="background:var(--primary);color:#fff;border:none;padding:11px 28px;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px;">Browse Products</button>
+    </div>`;
+    footer.style.display='none';
+    return;
+  }
+  footer.style.display='block';
+  const total = cart.reduce((s,i)=>s+i.price*i.qty, 0);
+  const origTotal = cart.reduce((s,i)=>s+i.originalPrice*i.qty, 0);
+  const savings = origTotal - total;
+
+  drawer.innerHTML = cart.map(item=>{
+    const img = getProductImage(item);
+    return`<div class="drawer-item" id="drawer-item-${item.id}">
+      <div class="drawer-item-img" onclick="closeCartDrawer();openProduct(${item.id})">
+        <img src="${img}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=200&q=60'">
+      </div>
+      <div class="drawer-item-info">
+        <div class="drawer-item-name" onclick="closeCartDrawer();openProduct(${item.id})">${item.name}</div>
+        <div class="drawer-item-seller">by ${item.seller}</div>
+        <div class="drawer-item-prices">
+          <span class="drawer-price">₦${item.price.toLocaleString()}</span>
+          <span class="drawer-old-price">₦${item.originalPrice.toLocaleString()}</span>
+        </div>
+        <div class="drawer-qty-row">
+          <button class="dqbtn" onclick="changeQty(${item.id},-1)">−</button>
+          <span class="dqval">${item.qty}</span>
+          <button class="dqbtn" onclick="changeQty(${item.id},1)">+</button>
+          <button class="drawer-remove" onclick="removeFromCart(${item.id})">🗑 Remove</button>
+        </div>
+      </div>
+      <div class="drawer-item-total">₦${(item.price*item.qty).toLocaleString()}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('drawer-savings').textContent = savings>0 ? `You save ₦${savings.toLocaleString()} 🎉` : '';
+  document.getElementById('drawer-total').textContent = '₦'+total.toLocaleString();
+  document.getElementById('drawer-count').textContent = cart.reduce((s,i)=>s+i.qty,0);
+}
 
 function pdChangeQty(d){pdQty=Math.max(1,pdQty+d);document.getElementById('pd-qty').textContent=pdQty;}
 
 function renderCart(){
   const list=document.getElementById('cart-items-list');
-  if(!cart.length){list.innerHTML='<div style="text-align:center;padding:60px 20px;"><div style="font-size:64px;margin-bottom:16px;">🛒</div><h3 style="color:var(--muted);">Your cart is empty</h3><button class="btn-primary" style="margin-top:16px;" onclick="showPage(\'products\')">Continue Shopping</button></div>';document.getElementById('cart-subtotal').textContent='₦0';document.getElementById('cart-discount').textContent='-₦0';document.getElementById('cart-total').textContent='₦0';return;}
-  list.innerHTML=cart.map(item=>`<div class="cart-item"><div class="cart-item-img" onclick="openProduct(${item.id})" style="overflow:hidden;border-radius:8px;"><img src="${getProductImage(item)}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"></div><div class="cart-item-info"><div class="cart-item-name">${item.name}</div><div style="font-size:11px;color:var(--muted);">Sold by: ${item.seller}</div><div class="cart-item-price">₦${item.price.toLocaleString()}</div><div class="qty-control-small"><button class="qty-btn-s" onclick="changeQty(${item.id},-1)">−</button><span style="font-weight:600;font-size:14px;min-width:24px;text-align:center;">${item.qty}</span><button class="qty-btn-s" onclick="changeQty(${item.id},1)">+</button></div><button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ Remove</button></div><div style="text-align:right;flex-shrink:0;"><div style="font-weight:700;color:var(--primary);">₦${(item.price*item.qty).toLocaleString()}</div><div style="font-size:11px;color:var(--muted);text-decoration:line-through;">₦${(item.originalPrice*item.qty).toLocaleString()}</div></div></div>`).join('');
-  const so=cart.reduce((s,i)=>s+i.originalPrice*i.qty,0),s=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  if(!cart.length){
+    list.innerHTML=`<div style="text-align:center;padding:60px 20px;">
+      <div style="font-size:64px;margin-bottom:16px;">🛒</div>
+      <h3 style="color:var(--muted);margin-bottom:8px;">Your cart is empty</h3>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:18px;">Looks like you haven't added anything yet.</p>
+      <button class="btn-primary" onclick="showPage('products')">Continue Shopping</button>
+    </div>`;
+    document.getElementById('cart-subtotal').textContent='₦0';
+    document.getElementById('cart-discount').textContent='-₦0';
+    document.getElementById('cart-total').textContent='₦0';
+    return;
+  }
+  list.innerHTML=cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item-img" onclick="openProduct(${item.id})" style="overflow:hidden;border-radius:8px;cursor:pointer;">
+        <img src="${getProductImage(item)}" alt="${item.name}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name" style="cursor:pointer;" onclick="openProduct(${item.id})">${item.name}</div>
+        <div style="font-size:11px;color:var(--muted);">Sold by: ${item.seller}</div>
+        <div class="cart-item-price">₦${item.price.toLocaleString()} <span style="font-size:11px;color:var(--muted);text-decoration:line-through;font-weight:400;">₦${item.originalPrice.toLocaleString()}</span></div>
+        <div class="qty-control-small">
+          <button class="qty-btn-s" onclick="changeQty(${item.id},-1)">−</button>
+          <span style="font-weight:700;font-size:15px;min-width:28px;text-align:center;">${item.qty}</span>
+          <button class="qty-btn-s" onclick="changeQty(${item.id},1)">+</button>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart(${item.id})">🗑️ Remove</button>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <div style="font-weight:700;color:var(--primary);font-size:15px;">₦${(item.price*item.qty).toLocaleString()}</div>
+        <div style="font-size:11px;color:var(--muted);text-decoration:line-through;">₦${(item.originalPrice*item.qty).toLocaleString()}</div>
+      </div>
+    </div>`).join('');
+  const so=cart.reduce((s,i)=>s+i.originalPrice*i.qty,0);
+  const s=cart.reduce((s,i)=>s+i.price*i.qty,0);
   document.getElementById('cart-subtotal').textContent='₦'+so.toLocaleString();
   document.getElementById('cart-discount').textContent='-₦'+(so-s).toLocaleString();
   document.getElementById('cart-total').textContent='₦'+s.toLocaleString();
@@ -1976,8 +2284,9 @@ function openProduct(id){
   document.getElementById('pd-stock-label').className='stock-label'+(low?' low':'');
   document.getElementById('pd-stock-label').textContent=p.stock;
 
-  // Add to cart button
-  document.getElementById('pd-add-cart').onclick=()=>{addToCart(id,pdQty);};
+  // Add to cart & Buy Now buttons
+  document.getElementById('pd-add-cart').onclick=()=>{ addToCart(id, pdQty, true); };
+  document.getElementById('pd-buy-now').onclick=()=>{ buyNow(id, pdQty); };
 
   // Description tab
   document.getElementById('pd-description-text').innerHTML=`
@@ -2011,7 +2320,7 @@ function openProduct(id){
     <tr><td>Return Policy</td><td>7 Days</td></tr>
     <tr><td>Warranty</td><td>Manufacturer Warranty</td></tr>
     <tr><td>Condition</td><td>Brand New</td></tr>
-    <tr><td>Item ID</td><td>BNM-${String(id).padStart(4,'0')}</td></tr>
+    <tr><td>Item ID</td><td>OCR-${String(id).padStart(4,'0')}</td></tr>
   `;
 
   // Reviews tab
@@ -2038,28 +2347,36 @@ function switchPdTab(tab,btn){
   document.getElementById('pd-tab-'+tab).classList.add('active');
 }
 
-// ===== PRODUCT CARDS =====
+// ===== PRODUCT CARDS (Jumia-style) =====
 function createProductCard(p){
-  const low=p.stock.includes('Low')||p.stock.includes('Last');
-  const imgUrl=getProductImage(p);
-  const liked=wishlist.includes(p.id);
-  const {avg,count}=getProductRating(p.id);
+  const low = p.stock.includes('Low')||p.stock.includes('Last');
+  const imgUrl = getProductImage(p);
+  const liked = wishlist.includes(p.id);
+  const {avg, count} = getProductRating(p.id);
+  const disc = Math.round((1 - p.price/p.originalPrice)*100);
   return`<div class="product-card" onclick="openProduct(${p.id})">
     <div class="product-img" style="position:relative;">
-      <div class="discount-badge">-20%</div>
-      <button class="wishlist-btn ${liked?'wishlisted':''}" onclick="event.stopPropagation();toggleWishlist(${p.id})">${liked?'❤️':'♡'}</button>
+      <div class="discount-badge">-${disc}%</div>
+      <button class="wishlist-btn ${liked?'wishlisted':''}" onclick="event.stopPropagation();toggleWishlist(${p.id})" title="${liked?'Remove from wishlist':'Add to wishlist'}">${liked?'❤️':'♡'}</button>
       <img src="${imgUrl}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80'">
+      <!-- Jumia-style hover action overlay -->
+      <div class="card-hover-actions" onclick="event.stopPropagation()">
+        <button class="card-add-btn" onclick="addToCart(${p.id},1,true)">🛒 Add to Cart</button>
+        <button class="card-buy-btn" onclick="buyNow(${p.id},1)">⚡ Buy Now</button>
+      </div>
     </div>
     <div class="product-info">
       <div class="product-name">${p.name}</div>
       <div class="product-seller">by ${p.seller}</div>
-      <div class="rating-row"><span class="stars-display">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</span><span class="rating-count">(${count})</span></div>
+      <div class="rating-row">
+        <span class="stars-display">${'★'.repeat(Math.round(avg))}${'☆'.repeat(5-Math.round(avg))}</span>
+        <span class="rating-count">(${count})</span>
+      </div>
       <div>
         <span class="product-price">₦${p.price.toLocaleString()}</span>
         <span class="product-old-price">₦${p.originalPrice.toLocaleString()}</span>
       </div>
       <div class="product-stock ${low?'low':''}">${low?'⚠️':'✅'} ${p.stock}</div>
-      <button class="add-cart-btn" onclick="event.stopPropagation();addToCart(${p.id})">🛒 Add to Cart</button>
     </div>
   </div>`;
 }
@@ -2127,12 +2444,12 @@ function closeSearch(){
 document.addEventListener('click',e=>{if(!e.target.closest('.search-wrapper'))closeSearch();});
 
 // ===== WISHLIST =====
-let wishlist=JSON.parse(localStorage.getItem('benim_wishlist')||'[]');
+let wishlist=JSON.parse(localStorage.getItem('ocrown_wishlist')||'[]');
 function toggleWishlist(id){
   const idx=wishlist.indexOf(id);
   if(idx>=0){wishlist.splice(idx,1);showToast('💔 Removed from wishlist');}
   else{wishlist.push(id);showToast('❤️ Added to wishlist!');}
-  localStorage.setItem('benim_wishlist',JSON.stringify(wishlist));
+  localStorage.setItem('ocrown_wishlist',JSON.stringify(wishlist));
   updateWishlistBadge();
   renderHomeGrids();applyFilters();
   if(document.getElementById('page-wishlist').classList.contains('active'))renderWishlistPage();
@@ -2166,7 +2483,7 @@ function renderWishlistPage(){
 }
 
 // ===== RATINGS & REVIEWS =====
-let reviewsByProduct=JSON.parse(localStorage.getItem('benim_reviews')||'{}');
+let reviewsByProduct=JSON.parse(localStorage.getItem('ocrown_reviews')||'{}');
 let currentReviewStar=0;
 
 function setReviewStar(n){
@@ -2230,7 +2547,7 @@ function submitReview(){
   if(!currentReviewStar){showToast('⚠️ Please pick a star rating');return;}
   if(!reviewsByProduct[currentProductId])reviewsByProduct[currentProductId]=[];
   reviewsByProduct[currentProductId].unshift({name,star:currentReviewStar,text,date:'Just now'});
-  localStorage.setItem('benim_reviews',JSON.stringify(reviewsByProduct));
+  localStorage.setItem('ocrown_reviews',JSON.stringify(reviewsByProduct));
   document.getElementById('review-name').value='';
   document.getElementById('review-text').value='';
   setReviewStar(0);
@@ -2262,12 +2579,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
 });
 
-// ===== PAGES =====
 function showPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   const page=document.getElementById('page-'+name);
   if(page){page.classList.add('active');window.scrollTo(0,0);}
-  if(name==='cart')renderCart();
+  if(name==='cart'){renderCart();}
   if(name==='checkout')renderCheckoutSummary();
   if(name==='products')applyFilters();
   if(name==='wishlist')renderWishlistPage();
@@ -2375,9 +2691,9 @@ function submitProduct(){
   };
 
   // Save to localStorage
-  const saved = JSON.parse(localStorage.getItem('benim_seller_products') || '[]');
+  const saved = JSON.parse(localStorage.getItem('ocrown_seller_products') || '[]');
   saved.push(newProduct);
-  localStorage.setItem('benim_seller_products', JSON.stringify(saved));
+  localStorage.setItem('ocrown_seller_products', JSON.stringify(saved));
 
   // Add to live product list
   allProducts.unshift(newProduct);
@@ -2401,20 +2717,22 @@ function clearUploadForm(){
 
 // Load seller-uploaded products from localStorage on page load
 function loadSellerProducts(){
-  const saved = JSON.parse(localStorage.getItem('benim_seller_products') || '[]');
+  const saved = JSON.parse(localStorage.getItem('ocrown_seller_products') || '[]');
   saved.forEach(p => allProducts.unshift(p));
 }
+
+// ===== PAGES =====
 
 // ===== SELLER TABS =====
 function showSellerTab(tab){
   ['overview','upload','myproducts','orders','earnings'].forEach(t=>{const e=document.getElementById('seller-tab-'+t);if(e)e.style.display=t===tab?'block':'none';});
   if(tab==='overview'){
-    const cnt = JSON.parse(localStorage.getItem('benim_seller_products')||'[]').length;
+    const cnt = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]').length;
     const el=document.getElementById('seller-stat-products');
     if(el) el.textContent=cnt;
   }
   if(tab==='myproducts'){
-    const sellerProducts = JSON.parse(localStorage.getItem('benim_seller_products')||'[]');
+    const sellerProducts = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]');
     const tbody=document.getElementById('seller-products-table');
     const demoRows = allProducts.slice(0,4).map(p=>`<tr><td>${p.icon} ${p.name.substring(0,22)}...</td><td>${p.category}</td><td>₦${p.price.toLocaleString()}</td><td>${p.stock}</td><td><button style="background:var(--muted);color:#fff;border:none;padding:4px 10px;border-radius:5px;font-size:12px;cursor:pointer;" onclick="showToast('Demo product — cannot edit')">Demo</button></td></tr>`).join('');
     const myRows = sellerProducts.map(p=>`<tr style="background:#f0fff4;"><td>${p.icon} ${p.name.substring(0,22)}</td><td>${p.category}</td><td>₦${p.price.toLocaleString()}</td><td>${p.stock}</td><td><button style="background:var(--red);color:#fff;border:none;padding:4px 10px;border-radius:5px;font-size:12px;cursor:pointer;" onclick="deleteSellerProduct(${p.id})">Delete</button></td></tr>`).join('');
@@ -2423,9 +2741,9 @@ function showSellerTab(tab){
 }
 
 function deleteSellerProduct(id){
-  let saved = JSON.parse(localStorage.getItem('benim_seller_products')||'[]');
+  let saved = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]');
   saved = saved.filter(p=>p.id!==id);
-  localStorage.setItem('benim_seller_products', JSON.stringify(saved));
+  localStorage.setItem('ocrown_seller_products', JSON.stringify(saved));
   allProducts = allProducts.filter(p=>p.id!==id);
   renderHomeGrids();
   applyFilters();
@@ -2437,8 +2755,117 @@ function deleteSellerProduct(id){
 function showCustomerTab(tab){['overview','orders','saved','track','profile'].forEach(t=>{const e=document.getElementById('cust-tab-'+t);if(e)e.style.display=t===tab?'block':'none';});}
 
 // ===== CHECKOUT =====
-function selectPay(t){document.getElementById('pay-bank').classList.toggle('selected',t==='bank');document.getElementById('pay-cod').classList.toggle('selected',t==='cod');document.getElementById('bank-details').style.display=t==='bank'?'block':'none';}
-function placeOrder(){if(!cart.length){showToast('⚠️ Your cart is empty!');return;}cart=[];updateCartBadge();showToast('🎉 Order placed! We will contact you shortly.');setTimeout(()=>showPage('customer-dashboard'),1500);}
+// ===== PAYSTACK INTEGRATION =====
+const PAYSTACK_PUBLIC_KEY = 'pk_test_28a11f626c0b53bd1307cb18e42d21929c88b0b0';
+let currentPayMethod = 'paystack';
+
+function selectPay(t){
+  currentPayMethod = t;
+  ['paystack','bank','cod'].forEach(id=>{
+    const el = document.getElementById('pay-'+id);
+    if(el) el.classList.toggle('selected', id===t);
+  });
+  document.getElementById('paystack-info').style.display  = t==='paystack' ? 'block' : 'none';
+  document.getElementById('bank-details').style.display   = t==='bank'     ? 'block' : 'none';
+  document.getElementById('cod-details').style.display    = t==='cod'      ? 'block' : 'none';
+  const btn = document.getElementById('place-order-btn');
+  if(t==='paystack') { btn.textContent='💳 Pay with Paystack'; btn.style.background='var(--primary)'; }
+  if(t==='bank')     { btn.textContent='✅ I Have Transferred — Confirm Order'; btn.style.background='#1a7a40'; }
+  if(t==='cod')      { btn.textContent='✅ Place Order (Pay on Delivery)'; btn.style.background='#e67e22'; }
+}
+
+function copyAcctNum(){
+  navigator.clipboard.writeText('8150898386').then(()=>showToast('✅ Account number copied!')).catch(()=>showToast('Account: 8150898386'));
+}
+
+function getCheckoutEmail(){
+  if(window._firebaseUser && window._firebaseUser.email) return window._firebaseUser.email;
+  const emailInput = document.getElementById('co-email');
+  return emailInput ? emailInput.value.trim() : '';
+}
+
+function getCheckoutName(){
+  if(window._firebaseUser && window._firebaseUser.displayName) return window._firebaseUser.displayName;
+  const nameInput = document.querySelector('#page-checkout input[placeholder*="full name"]');
+  return nameInput ? nameInput.value.trim() : 'Customer';
+}
+
+function handlePlaceOrder(){
+  if(!cart.length){ showToast('⚠️ Your cart is empty!'); return; }
+
+  const name  = getCheckoutName();
+  const email = getCheckoutEmail();
+  const phone = document.querySelector('#page-checkout input[type="tel"]')?.value.trim() || '';
+  const address = document.querySelector('#page-checkout input[placeholder*="address"]')?.value.trim() || '';
+
+  if(!address){ showToast('⚠️ Please enter your delivery address'); return; }
+
+  if(currentPayMethod === 'paystack'){
+    if(!email){ showToast('⚠️ Please enter your email address'); return; }
+    launchPaystack(name, email, phone);
+  } else if(currentPayMethod === 'bank'){
+    showToast('✅ Order confirmed! Please send transfer proof via WhatsApp.');
+    finaliseOrder('Bank Transfer');
+  } else {
+    showToast('🎉 Order placed! Our agent will collect payment on delivery.');
+    finaliseOrder('Cash on Delivery');
+  }
+}
+
+function launchPaystack(name, email, phone){
+  const totalKobo = cart.reduce((s,i)=>s+i.price*i.qty, 0) * 100; // Paystack uses kobo
+  const ref = 'OCR-' + Date.now();
+
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: totalKobo,
+    currency: 'NGN',
+    ref: ref,
+    firstname: name.split(' ')[0] || name,
+    lastname:  name.split(' ').slice(1).join(' ') || '',
+    phone: phone,
+    label: 'OCROWN Market Place',
+    metadata: {
+      custom_fields: [
+        { display_name: 'Customer Name',  variable_name: 'customer_name',  value: name },
+        { display_name: 'Delivery Phone', variable_name: 'delivery_phone', value: phone },
+        { display_name: 'Items',          variable_name: 'items',          value: cart.map(i=>i.name+'x'+i.qty).join(', ') }
+      ]
+    },
+    onClose: function(){
+      showToast('⚠️ Payment cancelled. Your cart is saved.');
+    },
+    callback: function(response){
+      // Payment successful
+      showToast('🎉 Payment successful! Ref: ' + response.reference);
+      finaliseOrder('Paystack — Ref: ' + response.reference);
+    }
+  });
+  handler.openIframe();
+}
+
+function finaliseOrder(payMethod){
+  const orderId = '#OCR' + Math.floor(Math.random()*90000+10000);
+  // Save to localStorage orders
+  const orders = JSON.parse(localStorage.getItem('ocrown_orders')||'[]');
+  orders.unshift({
+    id: orderId,
+    items: cart.map(i=>({name:i.name, qty:i.qty, price:i.price})),
+    total: cart.reduce((s,i)=>s+i.price*i.qty,0),
+    payMethod,
+    date: new Date().toLocaleDateString('en-NG',{day:'numeric',month:'short',year:'numeric'}),
+    status: 'Processing'
+  });
+  localStorage.setItem('ocrown_orders', JSON.stringify(orders));
+  cart = [];
+  updateCartBadge();
+  saveCartToStorage();
+  setTimeout(()=>{
+    showPage('customer-dashboard');
+    showToast('✅ Order '+orderId+' confirmed! Check your dashboard.');
+  }, 1200);
+}
 
 // ===== AUTH TABS =====
 function switchAuthTab(tab){document.getElementById('tab-customer').classList.toggle('active',tab==='customer');document.getElementById('tab-seller').classList.toggle('active',tab==='seller');}
@@ -2447,7 +2874,7 @@ function switchAuthTab(tab){document.getElementById('tab-customer').classList.to
 function trackOrder(){
   const id=document.getElementById('trackInput').value.trim();
   const result=document.getElementById('track-result');
-  const statuses={'#BNM010':{s:'Delivered',steps:['Order Placed ✅','Processing ✅','Out for Delivery ✅','Delivered ✅']},'#BNM011':{s:'Pending',steps:['Order Placed ✅','Processing ⏳','Out for Delivery ⏳','Delivered ⏳']},'#BNM012':{s:'Processing',steps:['Order Placed ✅','Processing ✅','Out for Delivery ⏳','Delivered ⏳']}};
+  const statuses={'#OCR010':{s:'Delivered',steps:['Order Placed ✅','Processing ✅','Out for Delivery ✅','Delivered ✅']},'#OCR011':{s:'Pending',steps:['Order Placed ✅','Processing ⏳','Out for Delivery ⏳','Delivered ⏳']},'#OCR012':{s:'Processing',steps:['Order Placed ✅','Processing ✅','Out for Delivery ⏳','Delivered ⏳']}};
   if(!id){result.innerHTML='<p style="color:var(--red);">Please enter an order ID.</p>';return;}
   const info=statuses[id.toUpperCase()];
   if(!info){result.innerHTML='<p style="color:var(--red);">Order not found. Please check your Order ID.</p>';return;}
@@ -2495,20 +2922,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-const ADMIN_EMAIL = 'Shopwithbenim@gmail.com';
-const ADMIN_PASSWORD = 'Aderonke';
+const ADMIN_EMAIL = 'ocrownmarket@gmail.com';
+const ADMIN_PASSWORD = 'Ocrown123@';
 
-// Secret: type "adminbenim" anywhere on page to open admin (desktop)
+// Secret: type "adminocrown" anywhere on page to open admin (desktop)
 let secretBuffer = '';
 document.addEventListener('keypress', e => {
   secretBuffer += e.key;
   if(secretBuffer.length > 10) secretBuffer = secretBuffer.slice(-10);
-  if(secretBuffer.includes('adminbenim')) openAdminPanel();
+  if(secretBuffer.includes('adminocrown')) openAdminPanel();
 });
 
 function openAdminPanel(){
   document.getElementById('admin-overlay').classList.add('open');
-  if(sessionStorage.getItem('benim_admin_auth')){
+  if(sessionStorage.getItem('ocrown_admin_auth')){
     document.getElementById('admin-login-screen').style.display = 'none';
     document.getElementById('admin-app').classList.add('open');
     admLoadDashboard();
@@ -2532,7 +2959,7 @@ function adminLogin(){
   const err = document.getElementById('adm-pw-error');
 
   if(email.toLowerCase() === ADMIN_EMAIL.toLowerCase() && pw === ADMIN_PASSWORD){
-    sessionStorage.setItem('benim_admin_auth','1');
+    sessionStorage.setItem('ocrown_admin_auth','1');
     document.getElementById('admin-login-screen').style.display = 'none';
     document.getElementById('admin-app').classList.add('open');
     document.getElementById('adm-email-input').value = '';
@@ -2550,7 +2977,7 @@ function adminLogin(){
 }
 
 function adminLogout(){
-  sessionStorage.removeItem('benim_admin_auth');
+  sessionStorage.removeItem('ocrown_admin_auth');
   document.getElementById('admin-app').classList.remove('open');
   document.getElementById('admin-login-screen').style.display = 'flex';
   document.getElementById('admin-overlay').classList.remove('open');
@@ -2561,17 +2988,17 @@ function adminLogout(){
 
 // ===== ADMIN DATA =====
 let admOrders = [
-  {id:'#BNM001',customer:'Adaeze Okonkwo',email:'adaeze@gmail.com',product:'iPhone 15 Pro Max',amount:850000,status:'Delivered',date:'Mar 10, 2025',phone:'08012345678',address:'Ring Road, Ibadan'},
-  {id:'#BNM002',customer:'Babatunde Fashola',email:'baba@gmail.com',product:'Nike Air Max 270',amount:45000,status:'Pending',date:'Mar 12, 2025',phone:'09023456789',address:'Bodija, Ibadan'},
-  {id:'#BNM003',customer:'Chiamaka Nwosu',email:'chi@gmail.com',product:'Samsung 55" 4K TV',amount:320000,status:'Processing',date:'Mar 13, 2025',phone:'07034567890',address:'Agodi, Ibadan'},
-  {id:'#BNM004',customer:'David Adeyemi',email:'david@gmail.com',product:'PS5 Console',amount:450000,status:'Delivered',date:'Mar 14, 2025',phone:'08045678901',address:'Ojoo, Ibadan'},
-  {id:'#BNM005',customer:'Esther Williams',email:'esther@gmail.com',product:'Adidas Ultraboost',amount:38000,status:'Pending',date:'Mar 15, 2025',phone:'09056789012',address:'Iwo Road, Ibadan'},
-  {id:'#BNM006',customer:'Femi Adeleke',email:'femi@gmail.com',product:'HP Laptop 15s',amount:185000,status:'Processing',date:'Mar 16, 2025',phone:'08167890123',address:'Dugbe, Ibadan'},
+  {id:'#OCR001',customer:'Adaeze Okonkwo',email:'adaeze@gmail.com',product:'iPhone 15 Pro Max',amount:850000,status:'Delivered',date:'Mar 10, 2025',phone:'08012345678',address:'Ring Road, Ibadan'},
+  {id:'#OCR002',customer:'Babatunde Fashola',email:'baba@gmail.com',product:'Nike Air Max 270',amount:45000,status:'Pending',date:'Mar 12, 2025',phone:'09023456789',address:'Bodija, Ibadan'},
+  {id:'#OCR003',customer:'Chiamaka Nwosu',email:'chi@gmail.com',product:'Samsung 55" 4K TV',amount:320000,status:'Processing',date:'Mar 13, 2025',phone:'07034567890',address:'Agodi, Ibadan'},
+  {id:'#OCR004',customer:'David Adeyemi',email:'david@gmail.com',product:'PS5 Console',amount:450000,status:'Delivered',date:'Mar 14, 2025',phone:'08045678901',address:'Ojoo, Ibadan'},
+  {id:'#OCR005',customer:'Esther Williams',email:'esther@gmail.com',product:'Adidas Ultraboost',amount:38000,status:'Pending',date:'Mar 15, 2025',phone:'09056789012',address:'Iwo Road, Ibadan'},
+  {id:'#OCR006',customer:'Femi Adeleke',email:'femi@gmail.com',product:'HP Laptop 15s',amount:185000,status:'Processing',date:'Mar 16, 2025',phone:'08167890123',address:'Dugbe, Ibadan'},
 ];
 let admFilteredOrders = [...admOrders];
 
-function admGetPending(){ return JSON.parse(localStorage.getItem('benim_seller_products')||'[]').filter(p=>!p.approved&&!p.rejected); }
-function admGetApproved(){ return JSON.parse(localStorage.getItem('benim_seller_products')||'[]').filter(p=>p.approved); }
+function admGetPending(){ return JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]').filter(p=>!p.approved&&!p.rejected); }
+function admGetApproved(){ return JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]').filter(p=>p.approved); }
 
 // ===== DASHBOARD =====
 function admLoadDashboard(){
@@ -2638,9 +3065,9 @@ function admRenderPending(list){
 }
 
 function admApprove(id){
-  let saved = JSON.parse(localStorage.getItem('benim_seller_products')||'[]');
+  let saved = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]');
   saved = saved.map(p => p.id===id ? {...p,approved:true,rejected:false} : p);
-  localStorage.setItem('benim_seller_products', JSON.stringify(saved));
+  localStorage.setItem('ocrown_seller_products', JSON.stringify(saved));
   // Add to live allProducts
   const p = saved.find(x=>x.id===id);
   if(p && !allProducts.find(x=>x.id===id)) allProducts.unshift(p);
@@ -2652,9 +3079,9 @@ function admApprove(id){
 }
 
 function admReject(id){
-  let saved = JSON.parse(localStorage.getItem('benim_seller_products')||'[]');
+  let saved = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]');
   saved = saved.map(p => p.id===id ? {...p,rejected:true,approved:false} : p);
-  localStorage.setItem('benim_seller_products', JSON.stringify(saved));
+  localStorage.setItem('ocrown_seller_products', JSON.stringify(saved));
   allProducts = allProducts.filter(p=>p.id!==id);
   renderHomeGrids(); applyFilters();
   admLoadDashboard();
@@ -2686,9 +3113,9 @@ function admRenderAllProducts(list){
 
 function admDeleteProduct(id){
   if(!confirm('Delete this product from marketplace?')) return;
-  let saved = JSON.parse(localStorage.getItem('benim_seller_products')||'[]');
+  let saved = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]');
   saved = saved.filter(p=>p.id!==id);
-  localStorage.setItem('benim_seller_products', JSON.stringify(saved));
+  localStorage.setItem('ocrown_seller_products', JSON.stringify(saved));
   allProducts = allProducts.filter(p=>p.id!==id);
   renderHomeGrids(); applyFilters();
   admRenderAllProducts(admGetApproved());
@@ -2736,9 +3163,9 @@ function admAddProduct(){
     fb.textContent='⚠️ Please fill in Name, Seller, Category and Price.'; return;
   }
   const newP = { id:Date.now(), name, seller, category, price, originalPrice:origPrice, stock, icon:'🛍️', imageUrl:admUploadedImg||null, description:desc||`${name} — quality product by ${seller}.`, approved:true, addedByAdmin:true, isNew:true };
-  const saved = JSON.parse(localStorage.getItem('benim_seller_products')||'[]');
+  const saved = JSON.parse(localStorage.getItem('ocrown_seller_products')||'[]');
   saved.unshift(newP);
-  localStorage.setItem('benim_seller_products', JSON.stringify(saved));
+  localStorage.setItem('ocrown_seller_products', JSON.stringify(saved));
   allProducts.unshift(newP);
   renderHomeGrids(); applyFilters();
   fb.style.cssText='display:block;background:rgba(46,160,67,0.1);border:1px solid #2ea043;border-radius:7px;padding:10px;color:#2ea043;';
@@ -3055,19 +3482,4 @@ window.addEventListener('scroll', function() {
           <table><thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
           <tbody id="adm-orders-table"></tbody></table>
         </div>
-      </div>
-
-    </main>
-  </div>
-</div>
-
-<!-- Admin Order Modal -->
-<div class="adm-modal-overlay" id="adm-order-modal">
-  <div class="adm-modal">
-    <div class="adm-modal-hdr"><h3 id="adm-modal-title">Order Details</h3><button class="adm-modal-close" onclick="admCloseModal()">✕</button></div>
-    <div class="adm-modal-body" id="adm-modal-body"></div>
-  </div>
-</div>
-
-</body>
-</html>
+  
