@@ -682,6 +682,72 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
 .drawer-remove:hover{color:var(--red);}
 .drawer-item-total{flex-shrink:0;font-weight:800;color:var(--secondary);font-size:14px;min-width:72px;text-align:right;}
 
+/* ===== ADMIN DASHBOARD v2 (screenshot style) ===== */
+.adm2-header{background:linear-gradient(135deg,var(--secondary),#1565c0);color:#fff;padding:16px 20px;border-radius:14px 14px 0 0;display:flex;align-items:center;justify-content:space-between;margin:-0px 0 0;}
+.adm2-stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0;}
+.adm2-stat{background:#fff;border-radius:12px;padding:14px 10px;text-align:center;box-shadow:0 2px 10px rgba(10,42,110,0.08);border:1.5px solid #eef1f8;}
+.adm2-stat-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;margin:0 auto 6px;}
+.adm2-stat-val{font-size:20px;font-weight:900;color:var(--secondary);font-family:'Nunito',sans-serif;}
+.adm2-stat-lbl{font-size:11px;color:var(--muted);margin-top:2px;}
+.adm2-tabs{display:flex;gap:0;border-bottom:2px solid var(--border);margin-bottom:16px;overflow-x:auto;scrollbar-width:none;}
+.adm2-tabs::-webkit-scrollbar{display:none;}
+.adm2-tab{padding:11px 16px;font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s;font-family:'Poppins',sans-serif;margin-bottom:-2px;}
+.adm2-tab:hover{color:var(--primary);}
+.adm2-tab.active{color:var(--primary);border-bottom-color:var(--primary);font-weight:800;}
+.adm2-section-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;padding:12px 16px;background:#f8f9fc;border-radius:10px;font-weight:700;font-size:14px;color:var(--secondary);}
+.adm2-search{border:1.5px solid var(--border);border-radius:7px;padding:7px 12px;font-size:12px;outline:none;width:150px;font-family:'Poppins',sans-serif;}
+.adm2-search:focus{border-color:var(--primary);}
+.adm2-filter{border:1.5px solid var(--border);border-radius:7px;padding:7px 10px;font-size:12px;outline:none;cursor:pointer;font-family:'Poppins',sans-serif;}
+.adm2-refresh-btn{background:var(--primary);color:#fff;border:none;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s;}
+.adm2-refresh-btn:hover{background:var(--primary-dark);}
+
+/* Order card — exactly like screenshot */
+.adm2-order-card{background:#fff;border-radius:12px;border:1.5px solid #eef1f8;border-left:4px solid var(--primary);box-shadow:0 2px 12px rgba(10,42,110,0.07);padding:16px;margin-bottom:14px;transition:box-shadow .2s;}
+.adm2-order-card:hover{box-shadow:0 4px 20px rgba(10,42,110,0.12);}
+.adm2-order-card.status-delivered{border-left-color:#27ae60;}
+.adm2-order-card.status-cancelled{border-left-color:#e74c3c;}
+.adm2-order-card.status-processing{border-left-color:#1565c0;}
+.adm2-order-card.status-pending{border-left-color:#f59e0b;}
+.adm2-order-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.adm2-order-id{font-size:17px;font-weight:900;color:var(--secondary);font-family:'Nunito',sans-serif;}
+.adm2-order-date{font-size:11px;color:var(--muted);margin-top:2px;}
+.adm2-status-pill{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;flex-shrink:0;}
+.pill-s-pending{background:#fff8e1;color:#b45309;border:1.5px solid #fcd34d;}
+.pill-s-processing{background:#e8f0fe;color:#1565c0;border:1.5px solid #93c5fd;}
+.pill-s-delivered{background:#e8f8ef;color:#15803d;border:1.5px solid #86efac;}
+.pill-s-cancelled{background:#fff0f0;color:#dc2626;border:1.5px solid #fca5a5;}
+.adm2-customer-row{font-size:14px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
+.adm2-customer-row span{color:var(--muted);font-weight:400;font-size:13px;}
+.adm2-address{font-size:12px;color:var(--muted);margin-bottom:2px;display:flex;align-items:center;gap:4px;}
+.adm2-email{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:4px;}
+.adm2-items-list{border-top:1px solid #f0f0f0;padding-top:10px;margin-bottom:10px;}
+.adm2-item-row{font-size:13px;color:#555;padding:3px 0;display:flex;justify-content:space-between;}
+.adm2-order-total{font-size:14px;font-weight:800;color:var(--secondary);padding-top:8px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.adm2-action-btns{display:flex;gap:10px;}
+.adm2-confirm-btn{flex:1;padding:13px;background:#27ae60;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s;font-family:'Poppins',sans-serif;}
+.adm2-confirm-btn:hover{background:#1e8449;}
+.adm2-decline-btn{flex:1;padding:13px;background:#e74c3c;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s;font-family:'Poppins',sans-serif;}
+.adm2-decline-btn:hover{background:#c0392b;}
+
+/* Pending product card */
+.adm2-pending-card{background:#fff;border-radius:12px;border:1.5px solid #fff8e1;border-left:4px solid #f59e0b;box-shadow:0 2px 10px rgba(10,42,110,0.06);padding:16px;margin-bottom:12px;}
+.adm2-product-card-row{background:#fff;border-radius:12px;border:1.5px solid #eef1f8;padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;box-shadow:0 2px 8px rgba(10,42,110,0.05);}
+
+/* Form card */
+.adm2-form-card{background:#fff;border-radius:12px;border:1.5px solid #eef1f8;padding:20px;box-shadow:0 2px 12px rgba(10,42,110,0.07);}
+.adm2-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+@media(max-width:500px){.adm2-form-grid{grid-template-columns:1fr;}}
+.adm2-input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;font-family:'Poppins',sans-serif;outline:none;transition:border-color .2s;box-sizing:border-box;}
+.adm2-input:focus{border-color:var(--primary);}
+.adm2-img-zone{border:2px dashed var(--border);border-radius:10px;padding:24px;text-align:center;cursor:pointer;background:var(--light);transition:all .2s;margin-bottom:14px;}
+.adm2-img-zone:hover{border-color:var(--primary);background:#f0f4ff;}
+
+@media(max-width:480px){
+  .adm2-stats-row{grid-template-columns:repeat(2,1fr);}
+  .adm2-order-id{font-size:15px;}
+  .adm2-tab{padding:9px 12px;font-size:12px;}
+}
+
 /* ===== BADGE POP ANIMATION ===== */
 @keyframes badgePop{0%{transform:scale(1)}30%{transform:scale(1.5)}60%{transform:scale(0.9)}100%{transform:scale(1)}}
 .badge-pop{animation:badgePop .35s ease both;}
@@ -1781,106 +1847,102 @@ footer { background:linear-gradient(180deg,#0a1a3a,#061020) !important; }
 
       <!-- ===== ADMIN TAB (visible only to admin) ===== -->
       <div id="cust-tab-admin" style="display:none;">
-        <div class="dash-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-          <div>
-            <h2 style="display:flex;align-items:center;gap:8px;">👑 Admin Panel <span style="background:#fdd835;color:#0a2a6e;font-size:12px;padding:2px 10px;border-radius:20px;font-weight:800;">ADMIN</span></h2>
-            <p style="color:var(--muted);font-size:13px;margin-top:2px;">Manage your marketplace</p>
+
+        <!-- Header bar like screenshot -->
+        <div class="adm2-header">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:20px;">🔒</span>
+            <span style="font-size:18px;font-weight:900;font-family:'Nunito',sans-serif;">Admin Dashboard</span>
           </div>
+          <button onclick="showCustomerTab('overview')" style="background:rgba(255,255,255,0.25);border:none;color:#fff;border-radius:50%;width:34px;height:34px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;">✕</button>
         </div>
 
-        <!-- Admin Stats -->
-        <div class="stats-row" id="adm-inline-stats">
-          <div class="stat-card" style="border-left:4px solid var(--primary);"><div class="stat-icon">📦</div><div class="stat-val" id="adm-inline-products">—</div><div class="stat-label">Total Products</div></div>
-          <div class="stat-card" style="border-left:4px solid #f59e0b;"><div class="stat-icon">⏳</div><div class="stat-val" id="adm-inline-pending">—</div><div class="stat-label">Pending Approvals</div></div>
-          <div class="stat-card" style="border-left:4px solid var(--green);"><div class="stat-icon">🛒</div><div class="stat-val" id="adm-inline-orders">—</div><div class="stat-label">Total Orders</div></div>
-          <div class="stat-card" style="border-left:4px solid var(--red);"><div class="stat-icon">💰</div><div class="stat-val" id="adm-inline-revenue">—</div><div class="stat-label">Total Revenue</div></div>
+        <!-- Stats row -->
+        <div class="adm2-stats-row" id="adm-inline-stats">
+          <div class="adm2-stat"><div class="adm2-stat-icon" style="background:#e8f0fe;">📦</div><div class="adm2-stat-val" id="adm-inline-products">—</div><div class="adm2-stat-lbl">Products</div></div>
+          <div class="adm2-stat"><div class="adm2-stat-icon" style="background:#fff8e1;">⏳</div><div class="adm2-stat-val" id="adm-inline-pending">—</div><div class="adm2-stat-lbl">Pending</div></div>
+          <div class="adm2-stat"><div class="adm2-stat-icon" style="background:#e8f8ef;">🛒</div><div class="adm2-stat-val" id="adm-inline-orders">—</div><div class="adm2-stat-lbl">Orders</div></div>
+          <div class="adm2-stat"><div class="adm2-stat-icon" style="background:#fce8e8;">💰</div><div class="adm2-stat-val" id="adm-inline-revenue">—</div><div class="adm2-stat-lbl">Revenue</div></div>
         </div>
 
-        <!-- Admin Sub-tabs -->
-        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px;border-bottom:2px solid var(--border);padding-bottom:10px;">
-          <button class="adm-inline-tab active" id="ait-orders" onclick="switchAdminSubTab('orders',this)">🛒 Orders</button>
-          <button class="adm-inline-tab" id="ait-pending" onclick="switchAdminSubTab('pending',this)">⏳ Approvals</button>
-          <button class="adm-inline-tab" id="ait-products" onclick="switchAdminSubTab('products',this)">📦 Products</button>
-          <button class="adm-inline-tab" id="ait-addproduct" onclick="switchAdminSubTab('addproduct',this)">➕ Add Product</button>
-          <button class="adm-inline-tab" id="ait-settings" onclick="switchAdminSubTab('settings',this)">⚙️ Settings</button>
+        <!-- Sub-tabs like screenshot: Orders | Upload Product | Manage Products -->
+        <div class="adm2-tabs">
+          <button class="adm2-tab active" id="ait-orders" onclick="switchAdminSubTab('orders',this)">Orders</button>
+          <button class="adm2-tab" id="ait-addproduct" onclick="switchAdminSubTab('addproduct',this)">Upload Product</button>
+          <button class="adm2-tab" id="ait-products" onclick="switchAdminSubTab('products',this)">Manage Products</button>
+          <button class="adm2-tab" id="ait-pending" onclick="switchAdminSubTab('pending',this)">Approvals</button>
+          <button class="adm2-tab" id="ait-settings" onclick="switchAdminSubTab('settings',this)">Settings</button>
         </div>
 
-        <!-- ORDERS SUB-TAB -->
+        <!-- ── ORDERS SUB-TAB (card style like screenshot) ── -->
         <div id="adm-sub-orders">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
-            <div style="font-weight:700;font-size:15px;">All Orders</div>
-            <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <input style="border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:12px;outline:none;width:160px;" placeholder="Search orders..." oninput="admInlineFilterOrders(this.value)">
-              <select style="border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:12px;outline:none;cursor:pointer;" onchange="admInlineFilterStatus(this.value)">
-                <option value="">All Status</option><option>Pending</option><option>Processing</option><option>Delivered</option><option>Cancelled</option>
+          <div class="adm2-section-hdr">
+            <span>All Customer Orders</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <input class="adm2-search" placeholder="Search..." oninput="admInlineFilterOrders(this.value)">
+              <select class="adm2-filter" onchange="admInlineFilterStatus(this.value)">
+                <option value="">All</option><option>Pending</option><option>Processing</option><option>Delivered</option><option>Cancelled</option>
               </select>
+              <button class="adm2-refresh-btn" onclick="loadAdminInlineDashboard()">🔄 Refresh</button>
             </div>
           </div>
-          <div class="data-table" style="overflow-x:auto;">
-            <table><thead><tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
-            <tbody id="adm-inline-orders-table"></tbody></table>
-          </div>
+          <div id="adm-inline-orders-cards"></div>
         </div>
 
-        <!-- PENDING APPROVALS SUB-TAB -->
+        <!-- ── PENDING APPROVALS ── -->
         <div id="adm-sub-pending" style="display:none;">
-          <div style="font-weight:700;font-size:15px;margin-bottom:14px;">Seller Uploads Awaiting Approval</div>
-          <div class="data-table" style="overflow-x:auto;">
-            <table><thead><tr><th>Product</th><th>Seller</th><th>Category</th><th>Price</th><th>Actions</th></tr></thead>
-            <tbody id="adm-inline-pending-table"></tbody></table>
-          </div>
+          <div class="adm2-section-hdr"><span>Seller Uploads — Awaiting Approval</span></div>
+          <div id="adm-inline-pending-cards"></div>
         </div>
 
-        <!-- ALL PRODUCTS SUB-TAB -->
+        <!-- ── MANAGE PRODUCTS ── -->
         <div id="adm-sub-products" style="display:none;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
-            <div style="font-weight:700;font-size:15px;">Live Products</div>
-            <input style="border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:12px;outline:none;width:200px;" placeholder="Search products..." oninput="admInlineFilterProducts(this.value)">
+          <div class="adm2-section-hdr">
+            <span>Live Products</span>
+            <input class="adm2-search" placeholder="Search products..." oninput="admInlineFilterProducts(this.value)">
           </div>
-          <div class="data-table" style="overflow-x:auto;">
-            <table><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Action</th></tr></thead>
-            <tbody id="adm-inline-products-table"></tbody></table>
-          </div>
+          <div id="adm-inline-products-cards"></div>
         </div>
 
-        <!-- ADD PRODUCT SUB-TAB -->
+        <!-- ── UPLOAD PRODUCT ── -->
         <div id="adm-sub-addproduct" style="display:none;">
-          <div style="font-weight:700;font-size:15px;margin-bottom:16px;">Add Product to Marketplace</div>
-          <div style="background:#fff;border-radius:var(--radius);padding:22px;box-shadow:var(--card-shadow);">
-            <div style="margin-bottom:14px;">
-              <label style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;">Product Image</label>
-              <input type="file" id="adm2-img-input" accept="image/*" style="display:none;" onchange="handleAdm2Image(event)">
-              <div onclick="document.getElementById('adm2-img-input').click()" id="adm2-img-zone" style="border:2px dashed var(--border);border-radius:8px;padding:20px;text-align:center;cursor:pointer;background:var(--light);transition:all .2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
-                <img id="adm2-img-prev" src="" style="display:none;width:100px;height:100px;object-fit:cover;border-radius:7px;margin:0 auto 8px;display:none;">
-                <div id="adm2-img-placeholder"><div style="font-size:28px;margin-bottom:6px;">📸</div><div style="font-weight:600;font-size:13px;color:var(--secondary);">Click to upload image</div></div>
+          <div class="adm2-section-hdr"><span>Upload New Product</span></div>
+          <div class="adm2-form-card">
+            <input type="file" id="adm2-img-input" accept="image/*" style="display:none;" onchange="handleAdm2Image(event)">
+            <div onclick="document.getElementById('adm2-img-input').click()" id="adm2-img-zone" class="adm2-img-zone">
+              <img id="adm2-img-prev" src="" style="display:none;width:100px;height:100px;object-fit:cover;border-radius:8px;margin:0 auto 8px;">
+              <div id="adm2-img-placeholder"><div style="font-size:32px;margin-bottom:6px;">📸</div><div style="font-weight:600;font-size:13px;color:var(--secondary);">Tap to upload image</div><div style="font-size:11px;color:var(--muted);margin-top:3px;">JPG, PNG — max 5MB</div></div>
+            </div>
+            <div class="adm2-form-grid">
+              <div class="form-group"><label>Product Name *</label><input type="text" id="adm2-name" placeholder="e.g. iPhone 15 Pro" class="adm2-input"></div>
+              <div class="form-group"><label>Seller / Brand *</label><input type="text" id="adm2-seller" placeholder="e.g. TechHub Ibadan" class="adm2-input"></div>
+              <div class="form-group"><label>Category *</label>
+                <select id="adm2-cat" class="adm2-input"><option value="">Select category</option><option>Phones & Tablets</option><option>Electronics</option><option>Fashion</option><option>Shoes</option><option>Bags</option><option>Beauty</option><option>Home Appliances</option><option>Gaming</option><option>Sports</option><option>Kids Items</option></select>
               </div>
+              <div class="form-group"><label>Stock</label>
+                <select id="adm2-stock" class="adm2-input"><option>In Stock</option><option>Low Stock</option><option>Last 3 Left</option><option>Out of Stock</option></select>
+              </div>
+              <div class="form-group"><label>Selling Price (₦) *</label><input type="number" id="adm2-price" placeholder="e.g. 250000" class="adm2-input"></div>
+              <div class="form-group"><label>Original Price (₦)</label><input type="number" id="adm2-orig" placeholder="e.g. 320000" class="adm2-input"></div>
+              <div class="form-group" style="grid-column:1/-1;"><label>Description</label><textarea id="adm2-desc" rows="3" placeholder="Product features, specs..." class="adm2-input" style="resize:vertical;"></textarea></div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
-              <div class="form-group"><label>Product Name *</label><input type="text" class="form-group input" id="adm2-name" placeholder="e.g. iPhone 15 Pro" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-              <div class="form-group"><label>Seller / Brand *</label><input type="text" id="adm2-seller" placeholder="e.g. TechHub Ibadan" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-              <div class="form-group"><label>Category *</label><select id="adm2-cat" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"><option value="">Select</option><option>Phones & Tablets</option><option>Electronics</option><option>Fashion</option><option>Shoes</option><option>Bags</option><option>Beauty</option><option>Home Appliances</option><option>Gaming</option><option>Sports</option><option>Kids Items</option></select></div>
-              <div class="form-group"><label>Stock Status</label><select id="adm2-stock" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"><option>In Stock</option><option>Low Stock</option><option>Last 3 Left</option><option>Out of Stock</option></select></div>
-              <div class="form-group"><label>Selling Price (₦) *</label><input type="number" id="adm2-price" placeholder="e.g. 250000" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-              <div class="form-group"><label>Original Price (₦)</label><input type="number" id="adm2-orig" placeholder="e.g. 320000" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-              <div class="form-group" style="grid-column:1/-1;"><label>Description</label><textarea id="adm2-desc" rows="3" placeholder="Product features, specs..." style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;resize:vertical;"></textarea></div>
+            <div style="display:flex;gap:10px;margin-top:4px;">
+              <button class="adm2-confirm-btn" style="flex:2;" onclick="admInlineAddProduct()">✅ Add to Marketplace</button>
+              <button class="adm2-decline-btn" style="flex:1;" onclick="admInlineClearForm()">Clear</button>
             </div>
-            <div style="display:flex;gap:10px;">
-              <button class="btn-primary" onclick="admInlineAddProduct()">✅ Add to Marketplace</button>
-              <button class="btn-outline" style="background:transparent;color:var(--muted);border:1px solid var(--border);padding:11px 20px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;" onclick="admInlineClearForm()">Clear</button>
-            </div>
-            <div id="adm2-feedback" style="display:none;margin-top:12px;padding:10px 14px;border-radius:7px;font-size:13px;"></div>
+            <div id="adm2-feedback" style="display:none;margin-top:12px;padding:10px 14px;border-radius:8px;font-size:13px;"></div>
           </div>
         </div>
 
-        <!-- SETTINGS SUB-TAB -->
+        <!-- ── SETTINGS ── -->
         <div id="adm-sub-settings" style="display:none;">
-          <div style="font-weight:700;font-size:15px;margin-bottom:16px;">Site Settings</div>
-          <div style="background:#fff;border-radius:var(--radius);padding:22px;box-shadow:var(--card-shadow);max-width:500px;">
-            <div class="form-group"><label>Site Name</label><input type="text" value="OCROWN Market Place Nigeria" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-            <div class="form-group"><label>WhatsApp Number</label><input type="tel" value="07080951392" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-            <div class="form-group"><label>Opay Account Number</label><input type="text" value="8150898386" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-            <div class="form-group"><label>Account Name</label><input type="text" value="Oladeji Opeyemi" style="width:100%;border:1px solid var(--border);border-radius:7px;padding:10px 14px;font-size:13px;outline:none;"></div>
-            <button class="btn-primary" onclick="showToast('✅ Settings saved!')">Save Settings</button>
+          <div class="adm2-section-hdr"><span>Site Settings</span></div>
+          <div class="adm2-form-card">
+            <div class="form-group"><label>Site Name</label><input type="text" value="OCROWN Market Place Nigeria" class="adm2-input"></div>
+            <div class="form-group"><label>WhatsApp Number</label><input type="tel" value="07080951392" class="adm2-input"></div>
+            <div class="form-group"><label>Opay Account Number</label><input type="text" value="8150898386" class="adm2-input"></div>
+            <div class="form-group"><label>Account Name</label><input type="text" value="Oladeji Opeyemi" class="adm2-input"></div>
+            <button class="adm2-confirm-btn" onclick="showToast('✅ Settings saved!')">Save Settings</button>
           </div>
         </div>
 
@@ -2950,7 +3012,7 @@ function switchAdminSubTab(tab, btn){
     const el=document.getElementById('adm-sub-'+t);
     if(el) el.style.display=t===tab?'block':'none';
   });
-  document.querySelectorAll('.adm-inline-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.adm2-tab').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
   if(tab==='orders') admInlineRenderOrders(admOrders);
   if(tab==='pending') admInlineRenderPending();
@@ -2959,7 +3021,6 @@ function switchAdminSubTab(tab, btn){
 
 function loadAdminInlineDashboard(){
   const pending = admGetPending();
-  const approved = admGetApproved();
   const revenue = admOrders.reduce((s,o)=>s+o.amount,0);
   document.getElementById('adm-inline-products').textContent = allProducts.length;
   document.getElementById('adm-inline-pending').textContent = pending.length;
@@ -2968,60 +3029,108 @@ function loadAdminInlineDashboard(){
   admInlineRenderOrders(admOrders);
 }
 
+function admStatusPillClass(status){
+  const map = {'Pending':'pill-s-pending','Processing':'pill-s-processing','Delivered':'pill-s-delivered','Cancelled':'pill-s-cancelled'};
+  return map[status]||'pill-s-pending';
+}
+function admStatusEmoji(status){
+  return {Pending:'⏳',Processing:'🔄',Delivered:'✅',Cancelled:'❌'}[status]||'⏳';
+}
+
 function admInlineRenderOrders(orders){
-  const tbody = document.getElementById('adm-inline-orders-table');
-  if(!tbody) return;
-  if(!orders.length){ tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--muted);padding:30px;">No orders yet</td></tr>'; return; }
-  tbody.innerHTML = orders.map(o=>`
-    <tr>
-      <td style="color:var(--primary);font-weight:700;font-size:12px;">${o.id}</td>
-      <td><strong style="font-size:13px;">${o.customer}</strong><div style="font-size:11px;color:var(--muted);">${o.phone||''}</div></td>
-      <td style="font-size:12px;">${o.product.substring(0,20)}</td>
-      <td style="font-weight:700;color:var(--green);">₦${o.amount.toLocaleString()}</td>
-      <td style="font-size:12px;">${o.date}</td>
-      <td><span class="status-badge ${o.status.toLowerCase()}">${o.status}</span></td>
-      <td>
-        <select style="border:1px solid var(--border);border-radius:5px;padding:4px 8px;font-size:11px;outline:none;cursor:pointer;" onchange="admUpdateOrderStatus('${o.id}',this.value)">
-          <option ${o.status==='Pending'?'selected':''}>Pending</option>
-          <option ${o.status==='Processing'?'selected':''}>Processing</option>
-          <option ${o.status==='Delivered'?'selected':''}>Delivered</option>
-          <option ${o.status==='Cancelled'?'selected':''}>Cancelled</option>
-        </select>
-      </td>
-    </tr>`).join('');
+  const wrap = document.getElementById('adm-inline-orders-cards');
+  if(!wrap) return;
+  if(!orders.length){
+    wrap.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);"><div style="font-size:40px;margin-bottom:10px;">📭</div><div>No orders yet</div></div>';
+    return;
+  }
+  wrap.innerHTML = orders.map(o=>{
+    const statusClass = 'status-'+o.status.toLowerCase();
+    const pillClass = admStatusPillClass(o.status);
+    const emoji = admStatusEmoji(o.status);
+    const itemsHtml = o.items
+      ? o.items.map(i=>`<div class="adm2-item-row"><span>${i.name} x${i.qty}</span><span style="font-weight:600;">₦${(i.price*i.qty).toLocaleString()}</span></div>`).join('')
+      : `<div class="adm2-item-row"><span>${o.product}</span><span style="font-weight:600;">₦${o.amount.toLocaleString()}</span></div>`;
+    const ref = o.ref || o.id.replace('#','');
+    const isDone = o.status==='Delivered'||o.status==='Cancelled';
+    return `<div class="adm2-order-card ${statusClass}" id="ocard-${o.id.replace('#','')}">
+      <div class="adm2-order-top">
+        <div>
+          <div class="adm2-order-id">${o.id}</div>
+          <div class="adm2-order-date">${o.date}</div>
+        </div>
+        <span class="adm2-status-pill ${pillClass}">${emoji} ${o.status}</span>
+      </div>
+      <div class="adm2-customer-row">
+        ${o.customer} <span>| 📞 ${o.phone||'N/A'}</span>
+      </div>
+      ${o.address?`<div class="adm2-address">📍 ${o.address}</div>`:''}
+      ${o.email?`<div class="adm2-email">✉️ ${o.email}</div>`:''}
+      <div class="adm2-items-list">${itemsHtml}</div>
+      <div class="adm2-order-total">
+        <span>Total: <strong>₦${o.amount.toLocaleString()}</strong></span>
+        <span style="font-size:12px;color:var(--muted);">Ref: ${ref}</span>
+      </div>
+      ${isDone ? `<div style="font-size:13px;color:${o.status==='Delivered'?'#27ae60':'#e74c3c'};font-weight:700;display:flex;align-items:center;gap:5px;">${emoji} ${o.status}</div>` :
+      `<div class="adm2-action-btns">
+        <button class="adm2-confirm-btn" onclick="admConfirmOrder('${o.id}')">✅ Confirm Order</button>
+        <button class="adm2-decline-btn" onclick="admDeclineOrder('${o.id}')">❌ Decline Order</button>
+      </div>`}
+    </div>`;
+  }).join('');
+}
+
+function admConfirmOrder(id){
+  const o = admOrders.find(x=>x.id===id);
+  if(o){ o.status='Delivered'; showToast('✅ Order '+id+' confirmed!'); admInlineRenderOrders(admOrders); loadAdminInlineDashboard(); }
+}
+
+function admDeclineOrder(id){
+  const o = admOrders.find(x=>x.id===id);
+  if(o){ o.status='Cancelled'; showToast('❌ Order '+id+' declined.'); admInlineRenderOrders(admOrders); }
 }
 
 function admUpdateOrderStatus(id, status){
   const o = admOrders.find(x=>x.id===id);
-  if(o){ o.status=status; showToast('✅ Order '+id+' updated to '+status); admInlineRenderOrders(admOrders); }
+  if(o){ o.status=status; showToast('✅ Order '+id+' → '+status); admInlineRenderOrders(admOrders); }
 }
 
 function admInlineFilterOrders(q){
-  const filtered = q ? admOrders.filter(o=>o.customer.toLowerCase().includes(q.toLowerCase())||o.id.toLowerCase().includes(q.toLowerCase())||o.product.toLowerCase().includes(q.toLowerCase())) : admOrders;
+  const filtered = q ? admOrders.filter(o=>
+    o.customer.toLowerCase().includes(q.toLowerCase())||
+    o.id.toLowerCase().includes(q.toLowerCase())||
+    (o.product||'').toLowerCase().includes(q.toLowerCase())
+  ) : admOrders;
   admInlineRenderOrders(filtered);
 }
 
 function admInlineFilterStatus(status){
-  const filtered = status ? admOrders.filter(o=>o.status===status) : admOrders;
-  admInlineRenderOrders(filtered);
+  admInlineRenderOrders(status ? admOrders.filter(o=>o.status===status) : admOrders);
 }
 
 function admInlineRenderPending(){
-  const tbody = document.getElementById('adm-inline-pending-table');
-  if(!tbody) return;
+  const wrap = document.getElementById('adm-inline-pending-cards');
+  if(!wrap) return;
   const pending = admGetPending();
-  if(!pending.length){ tbody.innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px;">No pending approvals</td></tr>'; return; }
-  tbody.innerHTML = pending.map(p=>`
-    <tr>
-      <td><strong style="font-size:13px;">${p.name.substring(0,25)}</strong></td>
-      <td style="font-size:12px;">${p.seller}</td>
-      <td style="font-size:12px;">${p.category}</td>
-      <td style="font-weight:700;color:var(--primary);">₦${p.price.toLocaleString()}</td>
-      <td style="display:flex;gap:6px;">
-        <button style="background:#e8f8ef;color:var(--green);border:1px solid #a8e6bf;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;" onclick="admInlineApprove(${p.id})">✅ Approve</button>
-        <button style="background:#fff0f0;color:var(--red);border:1px solid #f5a0a0;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;" onclick="admInlineReject(${p.id})">❌ Reject</button>
-      </td>
-    </tr>`).join('');
+  if(!pending.length){
+    wrap.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);"><div style="font-size:40px;margin-bottom:10px;">✅</div><div>No pending approvals</div></div>';
+    return;
+  }
+  wrap.innerHTML = pending.map(p=>`
+    <div class="adm2-pending-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+        <div>
+          <div style="font-weight:800;font-size:15px;">${p.name}</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:2px;">by ${p.seller} · ${p.category}</div>
+        </div>
+        <div style="font-size:18px;font-weight:900;color:var(--primary);font-family:'Nunito',sans-serif;">₦${p.price.toLocaleString()}</div>
+      </div>
+      ${p.imageUrl?`<img src="${p.imageUrl}" style="width:80px;height:80px;object-fit:cover;border-radius:8px;margin-bottom:10px;">`:``}
+      <div class="adm2-action-btns">
+        <button class="adm2-confirm-btn" onclick="admInlineApprove(${p.id})">✅ Approve</button>
+        <button class="adm2-decline-btn" onclick="admInlineReject(${p.id})">❌ Reject</button>
+      </div>
+    </div>`).join('');
 }
 
 function admInlineApprove(id){
@@ -3036,31 +3145,30 @@ function admInlineReject(id){
   if(idx>=0){ saved[idx].rejected=true; localStorage.setItem('ocrown_seller_products',JSON.stringify(saved)); showToast('❌ Product rejected.'); admInlineRenderPending(); }
 }
 
-function admInlineRenderProducts(){
-  const tbody = document.getElementById('adm-inline-products-table');
-  if(!tbody) return;
-  tbody.innerHTML = allProducts.slice(0,50).map(p=>`
-    <tr>
-      <td><strong style="font-size:13px;">${p.name.substring(0,28)}</strong></td>
-      <td style="font-size:12px;">${p.category}</td>
-      <td style="font-weight:700;color:var(--primary);">₦${p.price.toLocaleString()}</td>
-      <td><span class="status-badge ${p.stock.includes('Out')?'pending':'delivered'}" style="font-size:11px;">${p.stock}</span></td>
-      <td><button style="background:#fff0f0;color:var(--red);border:1px solid #f5a0a0;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;" onclick="admInlineDeleteProduct(${p.id})">🗑 Remove</button></td>
-    </tr>`).join('');
+function admInlineRenderProducts(list){
+  const wrap = document.getElementById('adm-inline-products-cards');
+  if(!wrap) return;
+  const products = list || allProducts.slice(0,60);
+  if(!products.length){ wrap.innerHTML='<div style="text-align:center;padding:30px;color:var(--muted);">No products found</div>'; return; }
+  wrap.innerHTML = products.map(p=>`
+    <div class="adm2-product-card-row">
+      <div style="display:flex;align-items:center;gap:12px;flex:1;min-width:0;">
+        <img src="${getProductImage(p)}" style="width:48px;height:48px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none'">
+        <div style="min-width:0;">
+          <div style="font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+          <div style="font-size:11px;color:var(--muted);">${p.category} · ${p.stock}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+        <span style="font-weight:800;color:var(--primary);font-family:'Nunito',sans-serif;">₦${p.price.toLocaleString()}</span>
+        <button style="background:#fff0f0;color:var(--red);border:1.5px solid #fca5a5;border-radius:7px;padding:6px 12px;font-size:11px;font-weight:700;cursor:pointer;" onclick="admInlineDeleteProduct(${p.id})">🗑 Remove</button>
+      </div>
+    </div>`).join('');
 }
 
 function admInlineFilterProducts(q){
-  const tbody = document.getElementById('adm-inline-products-table');
-  if(!tbody) return;
-  const filtered = q ? allProducts.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.category.toLowerCase().includes(q.toLowerCase())) : allProducts.slice(0,50);
-  tbody.innerHTML = filtered.map(p=>`
-    <tr>
-      <td><strong style="font-size:13px;">${p.name.substring(0,28)}</strong></td>
-      <td style="font-size:12px;">${p.category}</td>
-      <td style="font-weight:700;color:var(--primary);">₦${p.price.toLocaleString()}</td>
-      <td><span class="status-badge ${p.stock.includes('Out')?'pending':'delivered'}" style="font-size:11px;">${p.stock}</span></td>
-      <td><button style="background:#fff0f0;color:var(--red);border:1px solid #f5a0a0;border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer;" onclick="admInlineDeleteProduct(${p.id})">🗑 Remove</button></td>
-    </tr>`).join('');
+  const filtered = q ? allProducts.filter(p=>p.name.toLowerCase().includes(q.toLowerCase())||p.category.toLowerCase().includes(q.toLowerCase())) : allProducts.slice(0,60);
+  admInlineRenderProducts(filtered);
 }
 
 function admInlineDeleteProduct(id){
